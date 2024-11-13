@@ -15,16 +15,16 @@ const TenantContact = () => {
       </h4>
       <div className="grid grid-cols-12 bg-white rounded-xl mt-[1.5rem] p-[1.5rem] ">
         <div className="col-span-12 mb-[1rem]">
-        <h4 className="font-[500] text-[1.5rem] text-darkBlue ml-1">
-          Need Our Assistance?
-        </h4>
-        <p className="text-lightGray text-[0.9rem] font-[500]">
-          Reach out to our team for personalized support, inquiries about your
-          account, or any other questions you may have.<br></br> Use our contact options
-          to get assistance quickly and effectively.
-        </p>
+          <h4 className="font-[500] text-[1.5rem] text-darkBlue ml-1">
+            Need Our Assistance?
+          </h4>
+          <p className="text-lightGray text-[0.9rem] font-[500]">
+            Reach out to our team for personalized support, inquiries about your
+            account, or any other questions you may have.<br></br> Use our
+            contact options to get assistance quickly and effectively.
+          </p>
         </div>
-        
+
         {/* Callback request */}
         <div className="col-span-6 bg-white rounded-xl border border-[#D1D5DB]">
           <h4 className="p-[0.5rem] font-[500] text-[1.1rem] text-darkBlue rounded-t-xl bg-gradient-to-r from-[#D4F7FC80] via-[#A0E4F180] to-[#A0E4F180]">
@@ -49,16 +49,18 @@ const TenantContact = () => {
                 value="Test issue"
               />
             </div>
-            <div className="w-[40%]">
+            <div>
               <label className="input-label text-lightGray ">
                 Upload Photos (Optional)
               </label>
-              <WhiteButton
-                px={"px-[1.5rem]"}
-                py={"py-[0.3rem]"}
-                rounded={"rounded-lg"}
-                name="Upload"
-              />
+              <div className="w-[30%]">
+                <WhiteButton
+                  px={"px-[2.2rem]"}
+                  py={"py-[0.3rem]"}
+                  rounded={"rounded-lg"}
+                  name="Upload"
+                />
+              </div>
             </div>
             <div className="flex justify-end">
               <button className="text-white font-[500] rounded-lg bg-[#808080] py-2 px-3 mt-[1.5rem]">
@@ -89,6 +91,7 @@ const TenantContact = () => {
                 py={"py-[0.5rem]"}
                 rounded={"rounded-lg"}
                 name=""
+                showIcon={true}
               />
             </div>
           </div>
@@ -108,6 +111,7 @@ const TenantContact = () => {
                 py={"py-[0.5rem]"}
                 rounded={"rounded-lg"}
                 name=""
+                showIcon={true}
               />
             </div>
           </div>
@@ -125,6 +129,7 @@ const TenantContact = () => {
                 py={"py-[0.5rem]"}
                 rounded={"rounded-lg"}
                 name=""
+                showIcon={true}
               />
             </div>
           </div>

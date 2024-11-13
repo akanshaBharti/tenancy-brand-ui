@@ -60,6 +60,7 @@ const TenantHome = () => {
             py={"py-[0.3rem]"}
             rounded={"rounded-lg"}
             name="Edit"
+            showIcon={true}
           />
         </div>
 
@@ -81,6 +82,7 @@ const TenantHome = () => {
             py={"py-[0.3rem]"}
             rounded={"rounded-lg"}
             name="Manage"
+            showIcon={true}
           />
         </div>
 
@@ -106,6 +108,7 @@ const TenantHome = () => {
             py={"py-[0.3rem]"}
             rounded={"rounded-lg"}
             name="Manage"
+            showIcon={true}
           />
         </div>
 
@@ -127,6 +130,7 @@ const TenantHome = () => {
             py={"py-[0.3rem]"}
             rounded={"rounded-lg"}
             name="Upload"
+            showIcon={true}
           />
         </div>
 

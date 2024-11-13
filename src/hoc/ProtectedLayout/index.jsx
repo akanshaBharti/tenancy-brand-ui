@@ -16,7 +16,6 @@ const ProtectedLayout = () => {
       </div>
       <div className="col-span-10 pl-[4.4rem] pr-[1rem] py-[2rem] bg-[#F3F9FF] ">
         <div className=" absolute top-0 right-0 p-[2%] z-50 ">
-          {/* <TenantTopProfile /> */}
           {!shouldExcludeFooter && <TenantTopProfile />}
         </div>
         <Outlet/>

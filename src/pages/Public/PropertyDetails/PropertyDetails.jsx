@@ -194,7 +194,7 @@ const PropertyDetails = () => {
                 name="Schedule a Visit"
                 onClick={handleSchedule}
               />
-              {isScheduleVisitOpen && (
+              {isScheduleVisitOpen && (  
                 <ScheduleVisit onClose={handleClose} open={handleSchedule} />
               )}
 

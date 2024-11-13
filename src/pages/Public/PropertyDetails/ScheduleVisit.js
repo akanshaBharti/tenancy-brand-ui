@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import date from "../../../assets/image/Property/Date.svg";
 import time from "../../../assets/image/Property/time.svg";
 import location from "../../../assets/image/Property/location.svg";
-
+ 
 const ScheduleVisit = () => {
   const navigate = useNavigate();
   const [activeDialog, setActiveDialog] = useState("provideDetails");

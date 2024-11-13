@@ -75,16 +75,18 @@ const TenantMaintenanceRequest = () => {
                 value="Test issue"
               />
             </div>
-            <div className="w-[50%]">
+            <div className="">
               <label className="input-label text-lightGray ">
                 Upload Photos (Optional)
               </label>
-              <WhiteButton
-                px={"px-[1.5rem]"}
-                py={"py-[0.3rem]"}
-                rounded={"rounded-lg"}
-                name="Upload"
-              />
+              <div className="w-[45%]">
+                <WhiteButton
+                  px={"px-[2.2rem]"}
+                  py={"py-[0.3rem]"}
+                  rounded={"rounded-lg"}
+                  name="Upload"
+                />
+              </div>
             </div>
             <button className="text-white font-[500] rounded-lg bg-[#808080] p-2 w-full mt-[1.5rem]">
               Submit Request
