@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import YellowButton from "../../../components/Button/YellowButton";
 
 // images
 import apartmentImg from "../../../assets/image/Home/apartmentImg.svg";
-import fully from "../../../assets/image/Home/fully.svg";
-import bhk from "../../../assets/image/Home/bhk.svg";
-import sqft from "../../../assets/image/Home/sqft.svg";
+import sofa from "../../../assets/image/Home/sofa.svg";
+import bhk from "../../../assets/image/Home/bhkProp.svg";
+import expand from "../../../assets/image/Home/expand.svg";
 import rightArrow from "../../../assets/image/Home/arrow-right.svg";
 import premium from "../../../assets/image/Home/premium.svg";
 import location from "../../../assets/image/Home/location.svg";
@@ -26,11 +26,31 @@ import paperwork from "../../../assets/image/Home/paperwork.svg";
 import house_plus from "../../../assets/image/Home/house_plus.svg";
 import map from "../../../assets/image/Home/map.svg";
 import { Link } from "react-router-dom";
+import useGetHomeProperties from "../data/useGetHomeProperties";
 
 const TailoredLiving = () => {
+  const [
+    getPropertiesData,
+    getPropertiesError,
+    getPropertyIsLoading,
+    getProperties,
+  ] = useGetHomeProperties();
+  const [properties, setProperties] = useState([]);
   const cardsRef = useRef(null);
   const premiumCardsRef = useRef(null);
   const standarCardsRef = useRef(null);
+
+  useEffect(() => {
+    getProperties();
+  }, []);
+
+  useEffect(() => {
+    if (getPropertiesData?.data) {
+      if (getPropertiesData?.data?.results.length > 0) {
+        setProperties(getPropertiesData.data.results);
+      }
+    }
+  }, [getPropertiesData]);
 
   const cards = [
     {
@@ -69,20 +89,20 @@ const TailoredLiving = () => {
       price: "20,000",
     },
   ];
- 
+
   const scrollRightPremium = () => {
     if (premiumCardsRef.current) {
-      premiumCardsRef.current.scrollLeft += 300; 
+      premiumCardsRef.current.scrollLeft += 300;
     }
   };
   const scrollRightStandard = () => {
     if (standarCardsRef.current) {
-      standarCardsRef.current.scrollLeft += 300; 
+      standarCardsRef.current.scrollLeft += 300;
     }
   };
   const scrollRightShared = () => {
     if (cardsRef.current) {
-      cardsRef.current.scrollLeft += 300; 
+      cardsRef.current.scrollLeft += 300;
     }
   };
   const Premium = () => {
@@ -136,45 +156,67 @@ const TailoredLiving = () => {
           </div>
           {/* most popular cards */}
           <div className="relative">
-          <div ref={premiumCardsRef} className="flex gap-[1.5rem] mt-[1rem] overflow-x-scroll scroll-smooth hide-scrollbar">
-            {cards.map((item, index) => (
-              <div className="bg-white rounded-lg p-2 min-w-[300px]"
-              key={index}>
-                <img
-                  src={item.image}
-                  alt="apartment image"
-                  className="mb-[0.8rem]"
-                />
-                <h4 className="font-[500] text-[1rem] text-darkBlue">
-                  {item.apartment}
-                </h4>
-                <h4 className="text-lightGray font-[400] text-[0.8rem] ">
-                  {item.place}
-                </h4>
-                <div className="flex gap-2 my-[0.8rem]">
-                  <img src={bhk} alt="bhk image" />
-                  <img src={fully} alt="fully image" />
-                  <img src={sqft} alt="sqft image" />
-                </div>
-                <h4 className="font-[600] text-[1.3rem] text-darkBlue">
-                  ₹{item.price}{" "}
-                </h4>
-                <h4 className="m-0 text-lightGray font-[400] text-[0.8rem]">
-                  per month
-                </h4>
-                <div className="mt-[1rem] mb-[0.5rem] font-[500]">
-                  <YellowButton
-                    px={"px-[1rem]"}
-                    py={"py-[0.5rem]"}
-                    rounded={"rounded-lg"}
-                    name="Schedule a Visit"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-          {/* Right arrow button (Fixed, doesn't scroll with content) */}
-          <div className="bg-white rounded-full flex items-center justify-center p-2 absolute top-1/2 transform -translate-y-1/2 right-0 z-10 shadow-md">
+            <div
+              ref={premiumCardsRef}
+              className="flex gap-[1.5rem] mt-[1rem] overflow-x-scroll scroll-smooth hide-scrollbar"
+            >
+              {properties.map((item, index) => {
+                if (item.property_plan === 1) {
+                  return (
+                    <Link
+                     state={{properties:properties}}
+                    to={`/public/property-details/${item.id}`}>
+                      <div
+                        className="bg-white rounded-lg p-2 w-[320px]"
+                        key={item.id}
+                      >
+                        <img
+                          src={item?.media?.[0]?.photo}
+                          alt="apartment image"
+                          className="mb-[0.8rem]"
+                        />
+                        <h4 className="font-[500] text-[1rem] text-darkBlue">
+                          {item.building_name}
+                        </h4>
+                        <h4 className="text-lightGray font-[400] text-[0.8rem] ">
+                          {item.area}
+                        </h4>
+                        <div className="flex gap-2 my-[0.8rem]">
+                          <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                            <img src={bhk} alt="bhk icon" />
+                            <span>{item.property_type}</span>
+                          </div>
+                          <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                            <img src={sofa} alt="sofa Icon" />
+                            <span>{item.property_condition}</span>
+                          </div>
+                          <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                            <img src={expand} alt="Expand Icon" />
+                            <span>{item.total_square_feet} Sqft</span>
+                          </div>
+                        </div>
+                        <h4 className="font-[600] text-[1.3rem] text-darkBlue">
+                          ₹{item?.renting_details?.expected_rent_amount}{" "}
+                        </h4>
+                        <h4 className="m-0 text-lightGray font-[400] text-[0.8rem]">
+                          per month
+                        </h4>
+                        <div className="mt-[1rem] mb-[0.5rem] font-[500]">
+                          <YellowButton
+                            px={"px-[1rem]"}
+                            py={"py-[0.5rem]"}
+                            rounded={"rounded-lg"}
+                            name="Schedule a Visit"
+                          />
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                }
+              })}
+            </div>
+            {/* Right arrow button (Fixed, doesn't scroll with content) */}
+            <div className="bg-white rounded-full flex items-center justify-center p-2 absolute top-1/2 transform -translate-y-1/2 right-0 z-10 shadow-md">
               <button onClick={scrollRightPremium}>
                 <img
                   src={rightArrow}
@@ -183,7 +225,7 @@ const TailoredLiving = () => {
                 />
               </button>
             </div>
-        </div>
+          </div>
         </div>
       </div>
     );
@@ -246,43 +288,60 @@ const TailoredLiving = () => {
               className="flex gap-[1.5rem] mt-[1rem] overflow-x-scroll scroll-smooth hide-scrollbar"
               ref={standarCardsRef}
             >
-              {cards.map((item, index) => (
-                  <div
-                    className="bg-white rounded-lg p-2 min-w-[300px]"
-                    key={index}
-                  >
-                    <img
-                      src={item.image}
-                      alt="apartment image"
-                      className="mb-[0.8rem]"
-                    />
-                    <h4 className="font-[500] text-[1rem] text-darkBlue">
-                      {item.apartment}
-                    </h4>
-                    <h4 className="text-lightGray font-[400] text-[0.8rem] ">
-                      {item.place}
-                    </h4>
-                    <div className="flex gap-2 my-[0.8rem]">
-                      <img src={bhk} alt="bhk image" />
-                      <img src={fully} alt="fully image" />
-                      <img src={sqft} alt="sqft image" />
-                    </div>
-                    <h4 className="font-[600] text-[1.3rem] text-darkBlue">
-                      ₹{item.price}{" "}
-                    </h4>
-                    <h4 className="m-0 text-lightGray font-[400] text-[0.8rem]">
-                      per month
-                    </h4>
-                    <div className="mt-[1rem] mb-[0.5rem] font-[500]">
-                      <YellowButton
-                        px={"px-[1rem]"}
-                        py={"py-[0.5rem]"}
-                        rounded={"rounded-lg"}
-                        name="Schedule a Visit"
-                      />
-                    </div>
-                  </div>
-              ))}
+              {properties.map((item, index) => {
+                if (item.property_plan === 2) {
+                  return (
+                    <Link
+                    state={{properties:properties}}
+                    to={`/public/property-details/${item.id}`}>
+                      <div
+                        className="bg-white rounded-lg p-2 w-[320px]"
+                        key={item.id}
+                      >
+                        <img
+                          src={item?.media?.[0]?.photo}
+                          alt="apartment image"
+                          className="mb-[0.8rem]"
+                        />
+                        <h4 className="font-[500] text-[1rem] text-darkBlue">
+                          {item.building_name}
+                        </h4>
+                        <h4 className="text-lightGray font-[400] text-[0.8rem] ">
+                          {item.area}
+                        </h4>
+                        <div className="flex gap-2 my-[0.8rem]">
+                          <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                            <img src={bhk} alt="bhk icon" />
+                            <span>{item.property_type}</span>
+                          </div>
+                          <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                            <img src={sofa} alt="sofa Icon" />
+                            <span>{item.property_condition}</span>
+                          </div>
+                          <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                            <img src={expand} alt="Expand Icon" />
+                            <span>{item.total_square_feet} Sqft</span>
+                          </div>
+                        </div>
+                        <h4 className="font-[600] text-[1.3rem] text-darkBlue">
+                          ₹{item?.renting_details?.expected_rent_amount}{" "}
+                        </h4>
+                        <h4 className="m-0 text-lightGray font-[400] text-[0.8rem]">
+                          per month
+                        </h4>
+                        <div className="mt-[1rem] mb-[0.5rem] font-[500]">
+                          <YellowButton
+                            px={"px-[1rem]"}
+                            py={"py-[0.5rem]"}
+                            rounded={"rounded-lg"}
+                            name="Schedule a Visit"
+                          />
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                }
+              })}
             </div>
             {/* Right arrow button (Fixed, doesn't scroll with content) */}
             <div className="bg-white rounded-full flex items-center justify-center p-2 absolute top-1/2 transform -translate-y-1/2 right-0 z-10 shadow-md">
@@ -351,44 +410,67 @@ const TailoredLiving = () => {
             </button>
           </div>
           {/* most popular cards */}
-          <div className="relative">     
-          <div className="flex gap-[1.5rem] mt-[1rem] overflow-x-scroll scroll-smooth hide-scrollbar" ref={cardsRef}>
-            {cards.map((item, index) => (
-              <div className="bg-white rounded-lg p-2 min-w-[300px]">
-                <img
-                  src={item.image}
-                  alt="apartment image"
-                  className="mb-[0.8rem]"
-                />
-                <h4 className="font-[500] text-[1rem] text-darkBlue">
-                  {item.apartment}
-                </h4>
-                <h4 className="text-lightGray font-[400] text-[0.8rem] ">
-                  {item.place}
-                </h4>
-                <div className="flex gap-2 my-[0.8rem]">
-                  <img src={bhk} alt="bhk image" />
-                  <img src={fully} alt="fully image" />
-                  <img src={sqft} alt="sqft image" />
-                </div>
-                <h4 className="font-[600] text-[1.3rem] text-darkBlue">
-                  ₹{item.price}{" "}
-                </h4>
-                <h4 className="m-0 text-lightGray font-[400] text-[0.8rem]">
-                  per month
-                </h4>
-                <div className="mt-[1rem] mb-[0.5rem] font-[500]">
-                  <YellowButton
-                    px={"px-[1rem]"}
-                    py={"py-[0.5rem]"}
-                    rounded={"rounded-lg"}
-                    name="Schedule a Visit"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="bg-white rounded-full flex items-center justify-center p-2 absolute top-1/2 transform -translate-y-1/2 right-0 z-10 shadow-md">
+          <div className="relative">
+            <div
+              className="flex gap-[1.5rem] mt-[1rem] overflow-x-scroll scroll-smooth hide-scrollbar"
+              ref={cardsRef}
+            >
+              {properties.map((item, index) => {
+                if (item.property_plan === 3) {
+                  return (
+                    <Link 
+                    state={{properties:properties}}
+                    to={`/public/property-details/${item.id}`}>
+                      <div
+                        key={item.id}
+                        className="bg-white rounded-lg p-2 w-[320px]"
+                      >
+                        <img
+                          src={item?.media?.[0]?.photo}
+                          alt="apartment image"
+                          className="mb-[0.8rem]"
+                        />
+                        <h4 className="font-[500] text-[1rem] text-darkBlue">
+                          {item.building_name}
+                        </h4>
+                        <h4 className="text-lightGray font-[400] text-[0.8rem] ">
+                          {item.area}
+                        </h4>
+                        <div className="flex gap-2 my-[0.8rem]">
+                          <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                            <img src={bhk} alt="bhk icon" />
+                            <span>{item.property_type}</span>
+                          </div>
+                          <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                            <img src={sofa} alt="sofa Icon" />
+                            <span>{item.property_condition}</span>
+                          </div>
+                          <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                            <img src={expand} alt="Expand Icon" />
+                            <span>{item.total_square_feet} Sqft</span>
+                          </div>
+                        </div>
+                        <h4 className="font-[600] text-[1.3rem] text-darkBlue">
+                          ₹{item?.renting_details?.expected_rent_amount}{" "}
+                        </h4>
+                        <h4 className="m-0 text-lightGray font-[400] text-[0.8rem]">
+                          per month
+                        </h4>
+                        <div className="mt-[1rem] mb-[0.5rem] font-[500]">
+                          <YellowButton
+                            px={"px-[1rem]"}
+                            py={"py-[0.5rem]"}
+                            rounded={"rounded-lg"}
+                            name="Schedule a Visit"
+                          />
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                }
+              })}
+            </div>
+            <div className="bg-white rounded-full flex items-center justify-center p-2 absolute top-1/2 transform -translate-y-1/2 right-0 z-10 shadow-md">
               <button onClick={scrollRightShared}>
                 <img
                   src={rightArrow}
@@ -397,7 +479,6 @@ const TailoredLiving = () => {
                 />
               </button>
             </div>
-
           </div>
         </div>
       </div>
@@ -439,10 +520,9 @@ const TailoredLiving = () => {
 
               <div className="mt-[2rem]">
                 <Link to="/register">
-                
-                <button className="bg-darkBlue text-white py-2 px-[1.2rem] rounded-xl">
-                  Sign Up
-                </button>
+                  <button className="bg-darkBlue text-white py-2 px-[1.2rem] rounded-xl">
+                    Sign Up
+                  </button>
                 </Link>
               </div>
             </div>
@@ -532,13 +612,11 @@ const TailoredLiving = () => {
       <YourProperty />
 
       <div className="text-center pt-[5rem] text-darkBlue">
-      <h4 className="font-[600] text-[1.9rem] ">
-        See Why Renters and Owners Love Us.
-      </h4>
-      <img src={map} alt="map img" className="mt-[1rem]" />
+        <h4 className="font-[600] text-[1.9rem] ">
+          See Why Renters and Owners Love Us.
+        </h4>
+        <img src={map} alt="map img" className="mt-[1rem]" />
       </div>
-
-
     </div>
   );
 };

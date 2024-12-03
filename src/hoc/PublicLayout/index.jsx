@@ -5,7 +5,7 @@ import Footer from "../../pages/Public/Home/Footer";
 const PublicLayout = () => {
   const location = useLocation();
 
-  const excludeFooterPaths = ["/login", "/register"];
+  const excludeFooterPaths = ["/login", "/register", "/visiter/profile"];
 
   const shouldExcludeFooter = excludeFooterPaths.includes(location.pathname);
 

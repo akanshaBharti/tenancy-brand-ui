@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const useAPICall = (defaultData, defaultError) => {
   //handling States
@@ -7,6 +8,13 @@ const useAPICall = (defaultData, defaultError) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(defaultData);
   const [error, setError] = useState(defaultError);
+  const navigate = useNavigate();
+  // const location =useLocation();
+
+  const logout = () => {
+    localStorage.clear()
+    navigate("/");
+  }
 
   const callAPI = ({
     url = "",
@@ -14,7 +22,7 @@ const useAPICall = (defaultData, defaultError) => {
     defaultFallback = () => {},
     statusObj = [],
     body,
-    config = {},
+    config = {headers :{ Authorization : `token ${localStorage.getItem('token')}`}},
     params,
   }) => {
     // merging all the configurations
@@ -23,7 +31,7 @@ const useAPICall = (defaultData, defaultError) => {
       method,
       url,
       data: body,
-      header: {
+      headers: {
         ...(config.headers || {}),
       },
       params,
@@ -33,13 +41,13 @@ const useAPICall = (defaultData, defaultError) => {
     //axios call
     axios(axiosConfigObject)
       .then((res) => {
-        if (res?.data?.status_code && res?.data?.status_txt) {
+        if (res?.data?.status_code && res?.data?.status_text) {
           //finding the matching status
           let statusID = statusObj.findIndex((status) => {
             return (
               res.data.status_code === status?.status_code &&
-              (res.data.status_txt || "").toLowerCase() ===
-                status?.status_txt.toLowerCase()
+              (res.data.status_text || "").toLowerCase() ===
+                status?.status_text.toLowerCase()
             );
           });
 
@@ -64,9 +72,13 @@ const useAPICall = (defaultData, defaultError) => {
       })
       //handling error from API
       .catch((err) => {
+        if (err.response && err.response.status === 401) {
+          logout();
+        }else{
         console.log("API error");
         console.log({ err });
         defaultFallback();
+        }
       })
       .finally(() => {
         //turning the loader off

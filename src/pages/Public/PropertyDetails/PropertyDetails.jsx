@@ -1,54 +1,59 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Header from "../Home/Header";
 import "../inputLabel.css";
-import { Link } from "react-router-dom";
-import DialogBox from "../../../components/DialogBox";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 // images
 import arrow_right from "../../../assets/image/Search/arrow-right.svg";
-import property1 from "../../../assets/image/Property/property1.svg";
-import property2 from "../../../assets/image/Property/property2.svg";
-import property3 from "../../../assets/image/Property/property3.svg";
-import property4 from "../../../assets/image/Property/property4.svg";
-import fully_furnished from "../../../assets/image/Property/fully_furnished.svg";
 import gated from "../../../assets/image/Property/gated.svg";
-import bhk from "../../../assets/image/Property/bhk.svg";
 import east_facing from "../../../assets/image/Property/east_facing.svg";
-import sqft2000 from "../../../assets/image/Property/sqft2000.svg";
 import bed from "../../../assets/image/Property/bed.svg";
 import bath from "../../../assets/image/Property/bath.svg";
 import living from "../../../assets/image/Property/living.svg";
 import kitchen from "../../../assets/image/Property/kitchen.svg";
 import balcony from "../../../assets/image/Property/balcony.svg";
-import ac from "../../../assets/image/Property/ac.svg";
-import geyser from "../../../assets/image/Property/geyser.svg";
-import bed_comfort from "../../../assets/image/Property/bed_comfort.svg";
-import sofa from "../../../assets/image/Property/sofa.svg";
-import parking from "../../../assets/image/Property/parking.svg";
-import tv from "../../../assets/image/Property/tv.svg";
-import fridge from "../../../assets/image/Property/fridge.svg";
-import microwave from "../../../assets/image/Property/microwave.svg";
-import gasline from "../../../assets/image/Property/gasline.svg";
-import gym from "../../../assets/image/Property/gym.svg";
-import pool from "../../../assets/image/Property/pool.svg";
-import sports from "../../../assets/image/Property/sports.svg";
 import map_property from "../../../assets/image/Property/map_property.svg";
 import toggle from "../../../assets/image/Property/toggle.svg";
-import apartment_property from "../../../assets/image/Property/apartment_property.svg";
 import YellowButton from "../../../components/Button/YellowButton";
-import fully from "../../../assets/image/Home/fully.svg";
-import property_bhk from "../../../assets/image/Home/bhk.svg";
-import sqft from "../../../assets/image/Home/sqft.svg";
 import rightArrow from "../../../assets/image/Home/arrow-right.svg";
 import ScheduleVisit from "./ScheduleVisit";
+import useGetHomeIndividualProperty from "../data/useGetHomeIndividualProperty";
+import sofaIndi from "assets/image/Home/sofaIndividual.svg";
+import expandIndi from "assets/image/Home/expandIndividual.svg";
+import bhkIndi from "assets/image/Home/layoutPanelIndividual.svg";
+import { AuthStateContext } from "App";
+import {
+  showErrorToast,
+  showSuccessToast,
+} from "components/toaster/toastHelper";
 
 const PropertyDetails = () => {
+  const { isAuthenticated } = useContext(AuthStateContext);
   const [showTerms, setShowTerms] = useState(false);
+  const [individualProperty, setIndividualProperty] = useState({});
   const [showTenancy, setShowTenancy] = useState(false);
   const cardsRef = useRef(null);
-
+  const { itemId } = useParams();
+  const location = useLocation();
+  const properties = location.state?.properties;
   const [isScheduleVisitOpen, setIsScheduleVisitOpen] = useState(false);
+  const [
+    getIndividualPropertyData,
+    getIndividualPropertyError,
+    getIndividualPropertyIsLoading,
+    getIndividualProperty,
+  ] = useGetHomeIndividualProperty();
+  useEffect(() => {
+    if (itemId) {
+      getIndividualProperty(itemId);
+    }
+  }, []);
 
+  useEffect(() => {
+    if (getIndividualPropertyData?.data) {
+      setIndividualProperty(getIndividualPropertyData.data);
+    }
+  }, [getIndividualPropertyData]);
   const handleSchedule = () => {
     setIsScheduleVisitOpen(true);
   };
@@ -56,44 +61,6 @@ const PropertyDetails = () => {
   const handleClose = () => {
     setIsScheduleVisitOpen(false);
   };
-
-  const cards = [
-    {
-      id: "1",
-      image: apartment_property,
-      apartment: "Alekhya Apartments",
-      place: "Madhapur",
-      price: "20,000",
-    },
-    {
-      id: "2",
-      image: apartment_property,
-      apartment: "Alekhya Apartments",
-      place: "Madhapur",
-      price: "20,000",
-    },
-    {
-      id: "3",
-      image: apartment_property,
-      apartment: "Alekhya Apartments",
-      place: "Madhapur",
-      price: "20,000",
-    },
-    {
-      id: "4",
-      image: apartment_property,
-      apartment: "Alekhya Apartments",
-      place: "Madhapur",
-      price: "20,000",
-    },
-    {
-      id: "5",
-      image: apartment_property,
-      apartment: "Alekhya Apartments",
-      place: "Madhapur",
-      price: "20,000",
-    },
-  ];
 
   const scrollRightShared = () => {
     if (cardsRef.current) {
@@ -106,7 +73,7 @@ const PropertyDetails = () => {
       <Header />
       <div className="px-[5rem] mt-[1rem] ">
         <div className=" flex justify-between ">
-          <Link to="/public/search" className="flex gap-[0.5rem] items-center">
+          <Link to="/" className="flex gap-[0.5rem] items-center">
             <img src={arrow_right} alt="arrow_right" className="w-5 h-5" />
             Back to search results
           </Link>
@@ -117,19 +84,16 @@ const PropertyDetails = () => {
         </div>
 
         {/* property images */}
-        <div className="bg-white p-[0.8rem] rounded-md flex mt-[1rem] gap-[0.5rem] grid grid-cols-12">
-          <div className="col-span-6">
-            <img src={property1} alt="property1" />
-          </div>
-          <div className="col-span-6">
-            <img src={property2} alt="property2" />
-          </div>
-          <div className="col-span-6">
-            <img src={property3} alt="property3" />
-          </div>
-          <div className="col-span-6">
-            <img src={property4} alt="property4" />
-          </div>
+        <div className="bg-white p-[0.8rem] rounded-md mt-[1rem] gap-[0.5rem] grid grid-cols-12">
+          {individualProperty?.media?.map((item, index) => (
+            <div className="col-span-6" key={index}>
+              <img
+                src={item.photo}
+                alt="property"
+                className="w-full h-auto object-cover rounded-md"
+              />
+            </div>
+          ))}
         </div>
 
         {/* property details */}
@@ -138,28 +102,35 @@ const PropertyDetails = () => {
           <div className="col-span-7 bg-white rounded-b-lg">
             <div className="rounded-t-lg bg-[#E7E7FA] p-[1rem]">
               <h4 className="font-[500] text-[1.2rem] text-darkBlue">
-                Alekhya Radha Sadan Apartments
+                {individualProperty?.building_name}
               </h4>
               <p className="text-lightGray font-[500] text-[0.9rem]">
-                <b>Gachibowli</b>, Hyderabad, Telangana
+                <b>{individualProperty?.area}</b>, {individualProperty?.city},{" "}
+                {individualProperty?.state}
               </p>
             </div>
             <div className="rounded-b-lg p-[1rem]">
               <h4 className="font-[500] text-darkBlue mb-[1rem]">Overview</h4>
               <div className="flex gap-[1rem] flex-wrap">
-                <img
-                  src={fully_furnished}
-                  alt="fully_furnished"
-                  className="w-[8rem]"
-                />
+                <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#111827] rounded-2xl text-[0.8rem]">
+                  <img src={sofaIndi} alt="sofa Icon" />
+                  <span>{individualProperty?.property_condition}</span>
+                </div>
                 <img src={gated} alt="gated" className="w-[9rem]" />
-                <img src={bhk} alt="bhk" className="w-[6rem]" />
+                <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#111827] rounded-2xl text-[0.8rem]">
+                  <img src={bhkIndi} alt="bhk icon" />
+                  <span>{individualProperty?.property_type}</span>
+                </div>
                 <img
                   src={east_facing}
                   alt="east_facing"
                   className="w-[12rem]"
                 />
-                <img src={sqft2000} alt="sqft2000" className="w-[14rem]" />
+                {/* <img src={sqft2000} alt="sqft2000" className="w-[14rem]" /> */}
+                <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#111827] rounded-2xl text-[0.8rem]">
+                  <img src={expandIndi} alt="Expand Icon" />
+                  <span>{individualProperty?.total_square_feet} Sqft</span>
+                </div>
               </div>
             </div>
           </div>
@@ -168,18 +139,20 @@ const PropertyDetails = () => {
           <div className="col-span-5 bg-white rounded-b-lg">
             <div className="text-center rounded-t-lg bg-[#E7E7FA] p-[1rem]">
               <h4 className="font-[500] text-[1.2rem] text-[#1A1A7F]">
-                1 Room Available
+                {individualProperty?.renting_details?.availability
+                  ? "Available"
+                  : "Not Available"}
               </h4>
             </div>
             <div className="text-center justify-center flex gap-[9rem] rounded-b-lg px-[2rem] py-[1rem]">
               <h4 className="flex flex-col font-[600] text-[1.1rem] text-darkBlue">
-                ₹20,000
+                ₹{individualProperty?.renting_details?.expected_rent_amount}
                 <span className="font-[400] text-[0.8rem] text-lightGray">
                   Monthly Rent<br></br> (including Maintenance)
                 </span>
               </h4>
               <h4 className="flex flex-col font-[500] text-[1.1rem] text-darkBlue">
-                ₹40,000
+                ₹{individualProperty?.renting_details?.security_deposit}
                 <span className="font-[400] text-[0.8rem] text-lightGray">
                   Security Deposit <br></br> (for two months)
                 </span>
@@ -192,12 +165,22 @@ const PropertyDetails = () => {
                 py={"py-[0.5rem]"}
                 rounded={"rounded-lg"}
                 name="Schedule a Visit"
-                onClick={handleSchedule}
+                onClick={() => {
+                  if (isAuthenticated) {
+                    handleSchedule(); // Open the ScheduleVisit dialog
+                  } else {
+                    showErrorToast("Please login first to schedule a visit.");
+                  }
+                }}
               />
-              {isScheduleVisitOpen && (  
-                <ScheduleVisit onClose={handleClose} open={handleSchedule} />
-              )}
 
+              {isScheduleVisitOpen && isAuthenticated && (
+                <ScheduleVisit
+                  onClose={handleClose}
+                  open={isScheduleVisitOpen}
+                  buildingName={`${individualProperty?.building_name} , ${individualProperty?.area}`}
+                />
+              )}
               <h4 className="font-[400] text-[0.8rem] text-lightGray">
                 Fill the application to request for visit
               </h4>
@@ -234,34 +217,54 @@ const PropertyDetails = () => {
                 Comfort
               </h5>
               <div className="flex gap-[1rem] flex-wrap">
-                <img src={ac} alt="ac" className="w-[3.2rem]" />
-                <img src={geyser} alt="geyser" className="w-[4.6rem]" />
-                <img
-                  src={bed_comfort}
-                  alt="bed_comfort"
-                  className="w-[3.8rem]"
-                />
-                <img src={sofa} alt="kitchen" className="w-[3.8rem]" />
-                <img src={parking} alt="parking" className="w-[4.6rem]" />
-                <img src={tv} alt="tv" className="w-[3.2rem]" />
+                {individualProperty?.unique_aminities?.map((item, index) => {
+                  if (item.aminity_type_display === "Comfort") {
+                    return (
+                      <div key={item.id}>
+                        <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                          <img src={item.icon_url} alt={item.name} />
+                          <span>{item.name}</span>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
               </div>
 
               <h5 className="text-[0.9rem] text-lightGray font-[500] mb-2 mt-[1rem]">
                 Kitchen
               </h5>
               <div className="flex gap-[1rem] flex-wrap">
-                <img src={fridge} alt="fridge" className="w-[4.7rem]" />
-                <img src={microwave} alt="microwave" className="w-[5.9rem]" />
-                <img src={gasline} alt="gasline" className="w-[5.3rem]" />
+                {individualProperty?.unique_aminities?.map((item, index) => {
+                  if (item.aminity_type_display === "Kitchen") {
+                    return (
+                      <div key={item.id}>
+                        <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                          <img src={item.icon_url} alt={item.name} />
+                          <span>{item.name}</span>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
               </div>
 
               <h5 className="text-[0.9rem] text-lightGray font-[500] mb-2 mt-[1rem]">
                 Recreation
               </h5>
               <div className="flex gap-[1rem] flex-wrap">
-                <img src={gym} alt="gym" className="w-[4rem]" />
-                <img src={pool} alt="pool" className="w-[7.5rem]" />
-                <img src={sports} alt="bed_comfort" className="w-[6.7rem]" />
+                {individualProperty?.unique_aminities?.map((item, index) => {
+                  if (item.aminity_type_display === "Recreation") {
+                    return (
+                      <div key={item.id}>
+                        <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                          <img src={item.icon_url} alt={item.name} />
+                          <span>{item.name}</span>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
               </div>
             </div>
           </div>
@@ -375,29 +378,38 @@ const PropertyDetails = () => {
             className="px-[1rem] flex gap-[1.5rem] overflow-x-scroll scroll-smooth hide-scrollbar"
             ref={cardsRef}
           >
-            {cards.map((item, index) => (
+            {properties.map((item, index) => (
               <div
-                className="mb-[5rem] bg-white rounded-lg p-2 min-w-[300px]"
-                key={index}
+                className="mb-[5rem] bg-white rounded-lg p-2 min-w-[320px]"
+                key={item.id}
               >
                 <img
-                  src={item.image}
+                  src={item?.media?.[0]?.photo}
                   alt="apartment "
                   className="mb-[0.8rem]"
                 />
                 <h4 className="font-[500] text-[1rem] text-darkBlue">
-                  {item.apartment}
+                  {item.building_name}
                 </h4>
                 <h4 className="text-lightGray font-[400] text-[0.8rem] ">
-                  {item.place}
+                  {item.area}
                 </h4>
                 <div className="flex gap-2 my-[0.8rem]">
-                  <img src={property_bhk} alt="bhk " />
-                  <img src={fully} alt="fully " />
-                  <img src={sqft} alt="sqft " />
+                  <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                    <img src={bhkIndi} alt="bhk icon" />
+                    <span>{item.property_type}</span>
+                  </div>
+                  <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                    <img src={sofaIndi} alt="sofa Icon" />
+                    <span>{item.property_condition}</span>
+                  </div>
+                  <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                    <img src={expandIndi} alt="Expand Icon" />
+                    <span>{item.total_square_feet} Sqft</span>
+                  </div>
                 </div>
                 <h4 className="font-[600] text-[1.3rem] text-darkBlue">
-                  ₹{item.price}{" "}
+                  ₹{item?.renting_details?.expected_rent_amount}{" "}
                 </h4>
                 <h4 className="m-0 text-lightGray font-[400] text-[0.8rem]">
                   per month
@@ -417,7 +429,7 @@ const PropertyDetails = () => {
             <button onClick={scrollRightShared}>
               <img
                 src={rightArrow}
-                alt="right arrow image"
+                alt="right arrow icon"
                 className="w-5 h-5"
               />
             </button>

@@ -5,7 +5,7 @@ function WhiteButton(props) {
   return (
     <div>
       <button
-        className={`flex w-[100%] items-center whitespace-nowrap border border-[#E7E6E6] text-darkBlue bg-white   ${props.px} ${props.py} ${props.rounded} `}
+        className={`flex w-[100%] items-center whitespace-nowrap border border-[#E7E6E6] text-darkBlue bg-white ${props.px} ${props.py} ${props.rounded} `}
         onClick={props.onClick}
       >
         <p className="flex  items-center gap-[0.5rem] text-center w-[100%] m-0">

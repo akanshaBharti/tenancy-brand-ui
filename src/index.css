@@ -45,4 +45,31 @@ hr {
   padding: 0;
 }
 
+.Toastify__toast-container {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.Toastify__toast {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.Toastify__toast-body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.Toastify__close-button {
+  display: none !important;
+}
+
+.Toastify__progress-bar--error {
+  background-color: #f28888 !important;
+}
+.Toastify__progress-bar--success{
+  background-color: #0a61ec !important;
+}
+
 

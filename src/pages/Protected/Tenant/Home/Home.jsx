@@ -8,10 +8,12 @@ import upload from "../../../../assets/image/Owners/comprehensive.svg";
 import payment from "../../../../assets/image/Owners/owner_tenant.svg";
 import info from "../../../../assets/image/TenantHome/info.svg";
 import profile from "../../../../assets/image/TenantHome/profile.svg";
+import { useNavigate } from "react-router-dom";
 
 const TenantHome = () => {
+  const navigate = useNavigate();
   return (
-    <div className="mb-[2rem]">
+    <div className="mb-[4rem]">
       <h4 className="font-[600] text-[1.5rem] text-darkBlue ml-1">
         Welcome Dheeraj, 👋
       </h4>
@@ -56,6 +58,7 @@ const TenantHome = () => {
             </div>
           </div>
           <WhiteButton
+          onClick={() => navigate("/protected/tenant/profile")}
             px={"px-[1.9rem]"}
             py={"py-[0.3rem]"}
             rounded={"rounded-lg"}
@@ -78,6 +81,7 @@ const TenantHome = () => {
             </div>
           </div>
           <WhiteButton
+          onClick={() => navigate("/protected/tenant/rent")}
             px={"px-[1rem]"}
             py={"py-[0.3rem]"}
             rounded={"rounded-lg"}
@@ -104,6 +108,7 @@ const TenantHome = () => {
             </div>
           </div>
           <WhiteButton
+            onClick={() => navigate("/protected/tenant/maintenance")}
             px={"px-[1rem]"}
             py={"py-[0.3rem]"}
             rounded={"rounded-lg"}
@@ -135,15 +140,17 @@ const TenantHome = () => {
         </div>
 
         {/* tenancy notifications */}
-        <div className="col-span-12 bg-white rounded-xl border border-[#D1D5DB]">  
+        <div className="col-span-12 bg-white rounded-xl border border-[#D1D5DB]">
           <h4 className="p-[0.5rem] font-[500] text-[1.1rem] text-darkBlue rounded-t-xl bg-gradient-to-r from-[#D4F7FC80] via-[#A0E4F180] to-[#A0E4F180]">
             Tenancy Notifications
           </h4>
           <div className="text-center rounded-b-xl py-[4rem]">
-          <p className="p-[0.5rem] font-[500] text-[1rem] text-darkBlue">
-            Stay informed with the latest updates, Important announcment, and news from <br></br>
-          <span className="text-[#F26664]">Tenancy</span>  management to keep you in the loop about any changes or events.
-          </p>
+            <p className="p-[0.5rem] font-[500] text-[1rem] text-darkBlue">
+              Stay informed with the latest updates, Important announcment, and
+              news from <br></br>
+              <span className="text-[#F26664]">Tenancy</span> management to keep
+              you in the loop about any changes or events.
+            </p>
           </div>
         </div>
       </div>

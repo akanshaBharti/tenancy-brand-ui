@@ -2,21 +2,25 @@
 import { useRoutes } from "react-router-dom";
 import routes from "./routes";
 import { createContext, useEffect, useMemo, useState } from "react";
+
 export const AuthStateContext = createContext();
 export const UserDetailsContext = createContext();
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userDetails, setUserDetails] = useState({});
-  const routing = useRoutes(routes(isAuthenticated));
+  // const routing = useRoutes(routes(isAuthenticated));
 
   useEffect(() => {
-    if (sessionStorage.getItem("token")) {
+    if (localStorage.getItem("token")) {
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
     }
+
   }, []);
+  const routing = useRoutes(routes(isAuthenticated));
+
 
   const AuthStateContextValue = useMemo(
     () => ({ isAuthenticated, setIsAuthenticated }),
@@ -31,9 +35,9 @@ const App = () => {
   return (
     <AuthStateContext.Provider value={AuthStateContextValue}>
       <UserDetailsContext.Provider value={UserDetailsContextValue}>
-        {routing}
-      </UserDetailsContext.Provider>
-    </AuthStateContext.Provider>
+         {routing}
+       </UserDetailsContext.Provider>
+     </AuthStateContext.Provider>
   );
 };
 
