@@ -15,7 +15,7 @@ const App = () => {
     if (localStorage.getItem("token")) {
       setIsAuthenticated(true);
     } else {
-      setIsAuthenticated(false);
+      setIsAuthenticated(true);
     }
 
   }, []);

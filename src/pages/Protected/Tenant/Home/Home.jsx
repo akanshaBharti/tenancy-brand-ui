@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const TenantHome = () => {
   const navigate = useNavigate();
   return (
-    <div className="mb-[4rem]">
+    <div className="mb-[1rem] min-h-screen">
       <h4 className="font-[600] text-[1.5rem] text-darkBlue ml-1">
         Welcome Dheeraj, 👋
       </h4>

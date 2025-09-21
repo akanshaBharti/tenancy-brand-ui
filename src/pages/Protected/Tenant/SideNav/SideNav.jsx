@@ -112,7 +112,8 @@ const TenantSideNav = () => {
         </ul>
 
         {/* logout */}
-        <div className="mt-[17rem]">
+        {/* mt-[17rem]  */}
+        <div className="mt-[200%]">
           <hr/>
           <button
             onClick={handleLogoutClicked}

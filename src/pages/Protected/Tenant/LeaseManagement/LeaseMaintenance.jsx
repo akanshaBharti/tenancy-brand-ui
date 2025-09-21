@@ -80,7 +80,7 @@ const TenantLeaseManagement = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <div className="mb-16 bg-blue-100 min-h-screen ">
         <h4 className="font-semibold text-2xl text-darkBlue mb-6">
           Lease Agreement

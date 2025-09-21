@@ -21,7 +21,7 @@ const OwnerManageProperty = () => {
         <AddNewProperty setIsAddPropertyClicked={setIsAddPropertyClicked} />
       ) : (
         <>
-          {isLoading && <Loader />}
+          {/* {isLoading && <Loader />} */}
 
           <div className="mb-[2rem] h-screen">
             <h4 className="font-[600] text-[1.5rem] text-darkBlue ml-1">

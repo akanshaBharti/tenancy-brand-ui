@@ -86,15 +86,16 @@ const Login = () => {
     };
 
     const handleTenantSignIn = () => {
-      if (validateInputs()) {
-        const authDetails = {
-          // mobile_number: email,
-          mobile_number: mobile_number,
-          password: password,
-        };
-        console.log("tenant login details:", authDetails);
-        postLogin(authDetails);
-      }
+      // if (validateInputs()) {
+      //   const authDetails = {
+      //     // mobile_number: email,
+      //     mobile_number: mobile_number,
+      //     password: password,
+      //   };
+      //   console.log("tenant login details:", authDetails);
+      //   postLogin(authDetails);
+      // }
+      navigate("/protected/tenant/home");
     };
 
     const handleKeyDown = (e) => {
@@ -202,13 +203,14 @@ const Login = () => {
     };
 
     const handleOwnerSignIn = () => {
-      if (validateInputs()) {
-        const authDetails = {
-          mobile_number: mobile_number,
-          password: password,
-        };
-        postLogin(authDetails);
-      }
+      // if (validateInputs()) {
+      //   const authDetails = {
+      //     mobile_number: mobile_number,
+      //     password: password,
+      //   };
+      //   postLogin(authDetails);
+      // }
+      navigate("/protected/owner/home");
     };
 
     const handleKeyDown = (e) => {

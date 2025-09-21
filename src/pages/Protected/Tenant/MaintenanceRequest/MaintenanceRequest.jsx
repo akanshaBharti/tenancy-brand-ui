@@ -53,7 +53,7 @@ const TenantMaintenanceRequest = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <div className=" h-screen">
         <h4 className="font-[600] text-[1.5rem] text-darkBlue ml-1">
           Maintenance Request

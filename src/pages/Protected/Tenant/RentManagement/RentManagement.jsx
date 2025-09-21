@@ -37,7 +37,7 @@ const RentManagement = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <div className="bg-blue-100 min-h-screen pb-[2rem]">
         <div className="container mx-auto">
           <h4 className="font-semibold text-2xl text-darkBlue mb-6">

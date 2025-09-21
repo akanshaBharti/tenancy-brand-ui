@@ -51,7 +51,7 @@ const TenantContact = () => {
   };
 
   return (
-    <div className="mb-[4rem]">
+    <div className="mb-[1rem] min-h-screen">
       <h4 className="font-[600] text-[1.5rem] text-darkBlue ml-1">
         Contact Tenancy
       </h4>
