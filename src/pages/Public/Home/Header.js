@@ -21,20 +21,22 @@ const Header = () => {
   const [showPP, setShowPP] = useState(false);
 
   const firstNameLetter = user?.full_name
-    ? user?.full_name.split(" ")[0].charAt(0).toUpperCase()
-    : user?.business_name.split(" ")[0].charAt(0).toUpperCase();
+    ? user?.full_name.split(" ")[0]?.charAt(0).toUpperCase()
+    : user?.business_name.split(" ")[0]?.charAt(0).toUpperCase();
   const lastNameLetter = user?.full_name
-    ? user?.full_name.split(" ")[1].charAt(0).toUpperCase()
-    : user?.business_name.split(" ")[1].charAt(1).toUpperCase();
+    ? user?.full_name.split(" ")[1]?.charAt(0).toUpperCase()
+    : user?.business_name.split(" ")[1]?.charAt(1).toUpperCase();
 
   const fullNameLetter = firstNameLetter + lastNameLetter;
 
   const handleOpenDilog = () => {
-    setIsOpenDilog(true);
+     navigate("/register")
+    // setIsOpenDilog(true);
   };
 
   const handleOpenLoginDilog = () => {
-    setIsOpenLoginDilog(true);
+    navigate("/login")
+    // setIsOpenLoginDilog(true);
   };
 
   const handleOpenProfile = () => {
@@ -48,6 +50,7 @@ const Header = () => {
   const handleOpenScheduled = () => {
     navigate("/visiter/scheduledVisit");
   };
+  console.log(isAuthenticated)
 
   return (
     <div className="py-[1.5rem] px-[5rem]">
@@ -57,8 +60,10 @@ const Header = () => {
         </Link>
         <div className="flex gap-[1.5rem] text-[1rem] font-[500]">
           <p>Services</p>
-          <p>For Tenants</p>
-          <Link to="/public/owners">For Owners</Link>
+          {/* <p>For Tenants</p> */}
+          <Link to="/protected/tenant/home">For Tenants</Link>
+          {/* <Link to="/public/owners">For Owners</Link> */}
+          <Link to="/protected/owner/home">For Owners</Link>
         </div>
         {isAuthenticated ? (
           <>

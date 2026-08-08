@@ -378,7 +378,7 @@ const PropertyDetails = () => {
             className="px-[1rem] flex gap-[1.5rem] overflow-x-scroll scroll-smooth hide-scrollbar"
             ref={cardsRef}
           >
-            {properties.map((item, index) => (
+            {properties?.map((item, index) => (
               <div
                 className="mb-[5rem] bg-white rounded-lg p-2 min-w-[320px]"
                 key={item.id}

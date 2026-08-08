@@ -29,7 +29,7 @@ import AddNewProperty from "pages/Protected/Owner/Home/AddNewProperty";
 const routes = (isAuthenticated) => [
   {
     path: "/protected",
-    element: isAuthenticated && (
+    element: !isAuthenticated && (
       <>
         {console.log("protected page", isAuthenticated)}
         <ProtectedLayout />
