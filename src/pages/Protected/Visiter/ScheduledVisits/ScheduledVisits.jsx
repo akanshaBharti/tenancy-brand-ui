@@ -5,14 +5,11 @@ import YellowButton from "components/Button/YellowButton";
 // images
 import tenancyLogo from "assets/image/tenancyLogo.svg";
 import barIcon from "assets/image/Search/barIcon.svg";
-import search_filter from "assets/image/Search/search_filter.svg";
 import premiumBtn from "assets/image/Search/premiumBtn.svg";
 import searchApartment from "assets/image/Search/searchApartment.svg";
 import clockIcon from "assets/image/VisiterProfile/clockIcon.svg";
 import dateIcon from "assets/image/VisiterProfile/dateIcon.svg";
 import map from "assets/image/Search/map.svg";
-import arrow_right from "assets/image/Search/arrow-right.svg";
-import search from "assets/image/Search/search.svg";
 import previousBtn from "assets/image/VisiterProfile/arrow-left.svg";
 import WhiteButton from "components/Button/WhiteButton";
 import useGetScheduleVisit from "pages/Public/data/useGetScheduleVisit";
@@ -20,15 +17,14 @@ import ScheduleVisit from "pages/Public/PropertyDetails/ScheduleVisit";
 
 const ScheduledVisits = () => {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState(false);
   const [isScheduleVisitOpen, setIsScheduleVisitOpen] = useState(false);
   const [propertyId, setPropertyId] = useState(false);
 
-  const [getData, getIsError, getIsLoading, getScheduleDetails] =
-    useGetScheduleVisit();
+  const [getData, , , getScheduleDetails] = useGetScheduleVisit();
 
   useEffect(() => {
     getScheduleDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSchedule = (id) => {

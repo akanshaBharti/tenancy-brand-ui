@@ -1,4 +1,4 @@
-import {POST_EMAIL_CHANGE_OTP_URL, POST_MOBILE_CHANGE_OTP_URL} from "constants/api";
+import {POST_EMAIL_CHANGE_OTP_URL} from "constants/api";
 import useAPICall from "hooks/useAPICall";
 
 const usePostEmailChangeOtp = () => {

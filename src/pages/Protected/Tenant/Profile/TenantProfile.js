@@ -59,56 +59,55 @@ const TenantProfile = () => {
     },
   ]);
 
-  const [getData, getIsError, isLoading, getProfileDetails] =
-    useGetTenantProfile();
+  const [getData, , isLoading, getProfileDetails] = useGetTenantProfile();
 
   const [
     postContactData,
     postContactIsError,
-    postContactIsLoading,
+    ,
     postContactDetails,
   ] = usePostProfileContact();
   const [
     patchContactData,
     patchContactIsError,
-    patchContactIsLoading,
+    ,
     patchContactDetails,
   ] = usePatchProfileContact();
   const [
-    postRentalData,
+    ,
     postRentalIsError,
-    postRentalIsLoading,
-    postRentalDetails,
+    ,
+    ,
   ] = usePostProfileRental();
   const [
     patchRentalData,
     patchRentalIsError,
-    patchRentalIsLoading,
+    ,
     patchRentalDetails,
   ] = usePatchProfileRental();
-  const [postPanData, postPanIsError, postPanIsLoading, postPanDetails] =
-    usePostUploadPan();
+  const [postPanData, , , postPanDetails] = usePostUploadPan();
   const [
     postAAdharData,
-    postAAdharIsError,
-    postAAdharIsLoading,
+    ,
+    ,
     postAAdharDetails,
   ] = usePostUploadAadhar();
   const [
     patchProfileData,
-    patchProfileIsError,
-    patchProfileIsLoading,
+    ,
+    ,
     patchProfileDetails,
   ] = usePatchProfilePicture();
   const [
     deleteProfileData,
-    deleteProfileIsError,
-    deleteProfileIsLoading,
+    ,
+    ,
     deleteProfileDetails,
   ] = useDeleteProfilePicture();
 
   useEffect(() => {
     getProfileDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -117,6 +116,7 @@ const TenantProfile = () => {
       setContactEditClicked(false);
       getProfileDetails();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postContactData]);
 
   useEffect(() => {
@@ -124,6 +124,7 @@ const TenantProfile = () => {
       showSuccessToast("Profile Uploaded");
       getProfileDetails();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patchProfileData]);
 
   useEffect(() => {
@@ -143,6 +144,7 @@ const TenantProfile = () => {
       setContactEditClicked(false);
       getProfileDetails();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patchContactData]);
 
   useEffect(() => {
@@ -160,6 +162,7 @@ const TenantProfile = () => {
       showSuccessToast("Profile picture deleted successfully");
       getProfileDetails();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deleteProfileData]);
 
   useEffect(() => {
@@ -168,6 +171,7 @@ const TenantProfile = () => {
       setRentalEditClicked(false);
       getProfileDetails();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patchRentalData]);
   useEffect(() => {
     if (postPanData) {
@@ -238,7 +242,8 @@ const TenantProfile = () => {
           getData?.data?.tenant_basic_details?.emergency_contact_number
         );
       }
-    }, [getData]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleContactSaveChanges = () => {
       const formData = new FormData();
@@ -448,7 +453,8 @@ const TenantProfile = () => {
       if (getData?.data) {
         setProfilePicture(getData?.data?.profile_picture);
       }
-    }, [getData]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleUpdateProfile = (e) => {
       const profilePicture = e.target.files[0];
@@ -861,7 +867,8 @@ const TenantProfile = () => {
         setcountry(getData?.data?.rental_address?.country);
         setrentAgreement(getData?.data?.tenant_basic_details?.agreement);
       }
-    }, [getData]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleRentalSubmit = () => {
       const formData = new FormData();

@@ -5,7 +5,7 @@ import googleIcon from "../../../assets/image/googleIcon.svg";
 import "../inputLabel.css";
 import YellowButton from "../../../components/Button/YellowButton";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthStateContext, UserDetailsContext } from "../../../App";
+import { AuthStateContext } from "../../../App";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import usePostLogin from "../data/usePostLogin";
 import {
@@ -15,11 +15,10 @@ import {
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUserDetails } = useContext(UserDetailsContext);
   const { setIsAuthenticated } = useContext(AuthStateContext);
   const [isActive, setIsActive] = useState(true);
 
-  const [postLoginData, postLoginError, postLoginIsLoading, postLogin] =
+  const [postLoginData, postLoginError] =
     usePostLogin();
 
   useEffect(() => {
@@ -54,7 +53,8 @@ const Login = () => {
         navigate("/");
       }
     }
-  }, [postLoginData, setIsAuthenticated]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [postLoginData]);
 
   const handleTenant = () => {
     setIsActive(true);
@@ -66,24 +66,7 @@ const Login = () => {
   const Tenant = () => {
     const [mobile_number, setMobile_number] = useState("");
     const [password, setPassword] = useState("");
-    const [err, setErr] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-
-    const validateInputs = () => {
-      setErr("");
-
-      if (!mobile_number.trim()) {
-        setErr("Email/Mobile Number is required.");
-        return false;
-      }
-
-      if (!password.trim()) {
-        setErr("Password is required.");
-        return false;
-      }
-
-      return true;
-    };
 
     const handleTenantSignIn = () => {
       // if (validateInputs()) {
@@ -154,7 +137,7 @@ const Login = () => {
             </div>
             <h4 className="text-[#F4923C]">Forgot password</h4>
           </div>
-          <p className="text-center text-[0.9rem] text-red-600 m-0">{err}</p>
+          <p className="text-center text-[0.9rem] text-red-600 m-0"></p>
 
           <div className="flex flex-col justify-center text-center gap-[1rem]">
             <YellowButton
@@ -183,24 +166,7 @@ const Login = () => {
   const Owner = () => {
     const [mobile_number, setMobile_number] = useState("");
     const [password, setPassword] = useState("");
-    const [err, setErr] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-
-    const validateInputs = () => {
-      setErr("");
-
-      if (!mobile_number.trim()) {
-        setErr("Email/Mobile Number is required.");
-        return false;
-      }
-
-      if (!password.trim()) {
-        setErr("Password is required.");
-        return false;
-      }
-
-      return true;
-    };
 
     const handleOwnerSignIn = () => {
       // if (validateInputs()) {
@@ -267,7 +233,7 @@ const Login = () => {
             </div>
             <h4 className="text-[#F4923C]">Forgot password</h4>
           </div>
-          <p className="text-center text-[0.9rem] text-red-600 m-0">{err}</p>
+          <p className="text-center text-[0.9rem] text-red-600 m-0"></p>
 
           <div className="flex flex-col justify-center text-center gap-[1rem]">
             <YellowButton

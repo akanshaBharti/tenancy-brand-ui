@@ -3,16 +3,16 @@ import WhiteButton from "../../../../components/Button/WhiteButton";
 import mainetenance from "../../../../assets/image/Owners/regular.svg";
 import AddNewProperty from "../Home/AddNewProperty";
 import useGetOwnerManageProperty from "../data/useGetManageProperty";
-import Loader from "components/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 
 const OwnerManageProperty = () => {
   const navigate = useNavigate();
   const [IsAddpropertyClicked, setIsAddPropertyClicked] = useState(false);
-  const [data, isError, isLoading, getProperties] = useGetOwnerManageProperty();
+  const [data, , , getProperties] = useGetOwnerManageProperty();
 
   useEffect(() => {
     getProperties();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

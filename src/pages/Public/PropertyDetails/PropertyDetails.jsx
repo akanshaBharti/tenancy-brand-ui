@@ -24,7 +24,6 @@ import bhkIndi from "assets/image/Home/layoutPanelIndividual.svg";
 import { AuthStateContext } from "App";
 import {
   showErrorToast,
-  showSuccessToast,
 } from "components/toaster/toastHelper";
 
 const PropertyDetails = () => {
@@ -39,15 +38,15 @@ const PropertyDetails = () => {
   const [isScheduleVisitOpen, setIsScheduleVisitOpen] = useState(false);
   const [
     getIndividualPropertyData,
-    getIndividualPropertyError,
-    getIndividualPropertyIsLoading,
+    ,
+    ,
     getIndividualProperty,
   ] = useGetHomeIndividualProperty();
   useEffect(() => {
     if (itemId) {
       getIndividualProperty(itemId);
     }
-  }, []);
+  }, [getIndividualProperty, itemId]);
 
   useEffect(() => {
     if (getIndividualPropertyData?.data) {
@@ -217,54 +216,57 @@ const PropertyDetails = () => {
                 Comfort
               </h5>
               <div className="flex gap-[1rem] flex-wrap">
-                {individualProperty?.unique_aminities?.map((item, index) => {
-                  if (item.aminity_type_display === "Comfort") {
-                    return (
-                      <div key={item.id}>
-                        <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                          <img src={item.icon_url} alt={item.name} />
-                          <span>{item.name}</span>
-                        </div>
+              {individualProperty?.unique_aminities?.map((item, index) => {
+                if (item.aminity_type_display === "Comfort") {
+                  return (
+                    <div key={item.id}>
+                      <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                        <img src={item.icon_url} alt={item.name} />
+                        <span>{item.name}</span>
                       </div>
-                    );
-                  }
-                })}
+                    </div>
+                  );
+                }
+                return null;
+              })}
               </div>
 
               <h5 className="text-[0.9rem] text-lightGray font-[500] mb-2 mt-[1rem]">
                 Kitchen
               </h5>
               <div className="flex gap-[1rem] flex-wrap">
-                {individualProperty?.unique_aminities?.map((item, index) => {
-                  if (item.aminity_type_display === "Kitchen") {
-                    return (
-                      <div key={item.id}>
-                        <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                          <img src={item.icon_url} alt={item.name} />
-                          <span>{item.name}</span>
-                        </div>
+              {individualProperty?.unique_aminities?.map((item, index) => {
+                if (item.aminity_type_display === "Kitchen") {
+                  return (
+                    <div key={item.id}>
+                      <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                        <img src={item.icon_url} alt={item.name} />
+                        <span>{item.name}</span>
                       </div>
-                    );
-                  }
-                })}
+                    </div>
+                  );
+                }
+                return null;
+              })}
               </div>
 
               <h5 className="text-[0.9rem] text-lightGray font-[500] mb-2 mt-[1rem]">
                 Recreation
               </h5>
               <div className="flex gap-[1rem] flex-wrap">
-                {individualProperty?.unique_aminities?.map((item, index) => {
-                  if (item.aminity_type_display === "Recreation") {
-                    return (
-                      <div key={item.id}>
-                        <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                          <img src={item.icon_url} alt={item.name} />
-                          <span>{item.name}</span>
-                        </div>
+              {individualProperty?.unique_aminities?.map((item, index) => {
+                if (item.aminity_type_display === "Recreation") {
+                  return (
+                    <div key={item.id}>
+                      <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
+                        <img src={item.icon_url} alt={item.name} />
+                        <span>{item.name}</span>
                       </div>
-                    );
-                  }
-                })}
+                    </div>
+                  );
+                }
+                return null;
+              })}
               </div>
             </div>
           </div>

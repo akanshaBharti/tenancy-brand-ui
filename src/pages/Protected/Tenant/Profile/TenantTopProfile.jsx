@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-// images
-import profile from "../../../../assets/image/TenantHome/profile.svg";
 
 const TenantTopProfile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  const [showPP, setShowPP] = useState(false);
+  const [showPP] = useState(false);
 
   // useEffect(() => {
   //   if(user){

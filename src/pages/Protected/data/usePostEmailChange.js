@@ -1,4 +1,4 @@
-import {GET_PROFILE_URL, POST_EMAIL_CHANGE_URL, POST_MOBILE_CHANGE_NUM_URL} from "constants/api";
+import {POST_EMAIL_CHANGE_URL} from "constants/api";
 import useAPICall from "hooks/useAPICall";
 
 const usePostEmailChange = () => {

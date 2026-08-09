@@ -91,7 +91,7 @@ const FlexibleManage = () => {
             </div>
           </div>
           <div className="col-span-5">
-            <img src={subsImg} alt="subs image" className="max-w-[420px]" />
+            <img src={subsImg} alt="subs" className="max-w-[420px]" />
           </div>
         </div>
       </>
@@ -269,7 +269,7 @@ const FlexibleManage = () => {
             </div>
           </div>
           <div className="col-span-5">
-            <img src={sublet} alt="sublet image" className="w-[26rem] " />
+            <img src={sublet} alt="sublet" className="w-[26rem] " />
           </div>
         </div>
       </>

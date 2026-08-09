@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DialogBox from "../../../components/DialogBox";
 
 // images
@@ -7,10 +7,6 @@ import timeIcon from "../../../assets/image/Property/time.svg";
 import location from "../../../assets/image/Property/location.svg";
 import usePostScheduleVisit from "../data/usePostScheduleVisit";
 import { useParams } from "react-router-dom";
-import {
-  showErrorToast,
-  showSuccessToast,
-} from "components/toaster/toastHelper";
 import usePatchScheduleVisit from "../data/usePatchScheduleVisit";
 
 const ScheduleVisit = ({
@@ -28,9 +24,9 @@ const ScheduleVisit = ({
   const [date, setdate] = useState("");
   const [time, settime] = useState("");
   // const[date, setdate] = useState("");
-  const [postData, postIsError, postIsLoading, postScheduleDetails] =
+  const [postData, , postScheduleDetails] =
     usePostScheduleVisit();
-  const [patchData, patchIsError, patchIsLoading, patchScheduleDetails] =
+  const [, , , patchScheduleDetails] =
     usePatchScheduleVisit();
 
   const handleProceed = () => {
@@ -40,49 +36,6 @@ const ScheduleVisit = ({
   const handleConfirmVisit = () => {
     setActiveDialog("youAreSet");
   };
-
-  const handleReVisit = () => {
-    setActiveDialog("provideDetails");
-  };
-
-  const handleAddCalender = () => {
-    setActiveDialog(null);
-  };
-
-  useEffect(() => {
-    if (getData && propertyId) {
-      // Find the data based on the propertyId if it's part of getData
-      const propertyData = getData?.find(
-        (property) => property.id === propertyId
-      );
-
-      if (propertyData) {
-        setName(propertyData.user?.full_name || "");
-        setMobileNo(propertyData.user?.mobile_number || "");
-        setemail(propertyData.user?.email || "");
-        setdate(propertyData?.date);
-        settime(propertyData?.time_slot);
-      }
-    }
-  }, [getData, propertyId]);
-
-  useEffect(() => {
-    if (postData) {
-      showSuccessToast("Visit Scheduled Successfully.");
-    }
-  }, [postData]);
-
-  useEffect(() => {
-    if (patchData) {
-      showSuccessToast("Visit Re-Scheduled Successfully.");
-    }
-  }, [patchData]);
-
-  useEffect(() => {
-    if (postIsError) {
-      showErrorToast("Try Again.");
-    }
-  }, [postIsError]);
 
   const handleAddToCalender = () => {
     const formData = new FormData();

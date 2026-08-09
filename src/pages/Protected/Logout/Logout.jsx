@@ -11,8 +11,7 @@ const Logout = ({ open, onClose }) => {
   const { setIsAuthenticated } = useContext(AuthStateContext);
   const [logOutClicked, setLogOutClicked] = useState(false);
 
-  const [logoutData, LogoutError, LogoutIsLoading, postLogout] =
-    usePostLogout();
+  const [, , , postLogout] = usePostLogout();
 
   useEffect(() => {
     if (logOutClicked) {
@@ -21,7 +20,8 @@ const Logout = ({ open, onClose }) => {
       setIsAuthenticated(false);
       navigate("/");
     }
-  }, [logOutClicked]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [logOutClicked, navigate, setIsAuthenticated]);
 
   return (
     <div>

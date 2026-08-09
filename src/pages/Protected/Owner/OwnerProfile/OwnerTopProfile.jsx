@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-// images
-import profile from "../../../../assets/image/TenantHome/profile.svg";
-
 const OwnerTopProfile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  const [showPP, setShowPP] = useState(false);
+  const [showPP] = useState(false);
 
   const firstNameLetter = user?.full_name
     ? user?.full_name.split(" ")[0].charAt(0).toUpperCase()

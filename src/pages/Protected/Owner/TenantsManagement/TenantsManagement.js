@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import useGetOwnerTenantManagement from "../data/useGetOwnertenantManagement";
-import Loader from "components/Loader/Loader";
 
 const OwnerTenantsManagement = () => {
-  const [data, isError, isLoading, getTenantDetails] =
-    useGetOwnerTenantManagement();
+  const [data, , , getTenantDetails] = useGetOwnerTenantManagement();
 
   useEffect(() => {
     getTenantDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -1,5 +1,4 @@
 import PublicLayout from "./hoc/PublicLayout";
-import { Navigate } from "react-router-dom";
 import ProtectedLayout from "./hoc/ProtectedLayout";
 import Home from "./pages/Public/Home/Home";
 import Owners from "./pages/Public/Owners/Owners";
@@ -21,7 +20,6 @@ import OwnerTenantsManagement from "./pages/Protected/Owner/TenantsManagement/Te
 import OwnerProfile from "./pages/Protected/Owner/OwnerProfile/OwnerProfile";
 import Profile from "pages/Protected/Visiter/Profile/VisiterProfile";
 import Wishlist from "pages/Protected/Visiter/Wishlist/Wishlist";
-import ScheduleVisit from "pages/Public/PropertyDetails/ScheduleVisit";
 import ScheduledVisits from "pages/Protected/Visiter/ScheduledVisits/ScheduledVisits";
 import PropertyPreview from "pages/Protected/Owner/Home/PropertyPreview";
 import AddNewProperty from "pages/Protected/Owner/Home/AddNewProperty";

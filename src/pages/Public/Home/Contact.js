@@ -2,7 +2,6 @@ import React from "react";
 import chat from "../../../assets/image/Home/chat.svg";
 import support from "../../../assets/image/Home/support.svg";
 import call from "../../../assets/image/Home/call.svg";
-import map from "../../../assets/image/Home/map.svg";
 import { useLocation } from "react-router-dom";
 
 const Contact = () => {

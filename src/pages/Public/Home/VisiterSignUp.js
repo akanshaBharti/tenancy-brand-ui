@@ -3,17 +3,15 @@ import React, { useEffect, useState } from "react";
 import logo from "assets/image/Title/Logo.svg";
 import InputField from "components/InputFields/inputField";
 import YellowButton from "components/Button/YellowButton";
-import VisiterSignUpOtp from "./VisiterSignUpOtp";
 import { Link } from "react-router-dom";
 import usePostSignup from "../data/usePostSignup";
 import {
   showErrorToast,
   showSuccessToast,
 } from "components/toaster/toastHelper";
-import { toast } from "react-toastify";
 
 const VisiterSignUp = ({ isOpenDilog, setIsOpenDilog, setIsOpenOtp }) => {
-  const [postSignupData, postSignupError, postSignupIsLoading, postSignUp] =
+  const [postSignupData, postSignupError, , postSignUp] =
     usePostSignup();
 
   const [signUpForm, setSignUpForm] = useState({
@@ -40,6 +38,7 @@ const VisiterSignUp = ({ isOpenDilog, setIsOpenDilog, setIsOpenOtp }) => {
       }, 300);
       console.log("postSignupData", postSignupData);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postSignupData]);
 
   const [errors, setErrors] = useState({});

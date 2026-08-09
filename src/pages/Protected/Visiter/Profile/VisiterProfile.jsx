@@ -3,12 +3,9 @@ import tenancyLogo from "assets/image/tenancyLogo.svg";
 import YellowButton from "components/Button/YellowButton";
 import { Link, useNavigate } from "react-router-dom";
 import barIcon from "assets/image/Search/barIcon.svg";
-import plus from "assets/image/VisiterProfile/plus.svg";
-import editPen from "assets/image/VisiterProfile/edit-3.svg";
 import InputField from "components/InputFields/inputField";
 import previousBtn from "assets/image/VisiterProfile/arrow-left.svg";
 import eye from "assets/image/VisiterProfile/eye.svg"
-import edit_icon from "assets/image/VisiterProfile/edit-profile.svg"
 import usePostLogout from "pages/Protected/data/usePostLogout";
 import { AuthStateContext } from "App";
 import useGetProfile from "pages/Protected/data/useGetProfile";
@@ -42,81 +39,74 @@ const VisiterProfile = () => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [profilePicError, setProfilePicError] = useState("");
 
-  const [ 
-    logoutData,
-    LogoutError,
-    LogoutIsLoading,
-    postLogout,
-    setSuccessLogoutData,
-    setLogoutError,
-  ] = usePostLogout();
-
+  const [ , , , postLogout] = usePostLogout();
 
   const [ 
     getProfileData,
-    getProfileError,
-    getProfileIsLoading,
+    ,
+    ,
     getProfile
   ] = useGetProfile();
 
   const [ 
     patchBasicProfileData,
     patchBasicProfileError,
-    patchBasicIsLoading,
+    ,
     patchBasicProfile
   ] = usePatchBasicProfileData();
 
   const [ 
     postMobileChangeNumData,
     postMobileChangeNumError,
-    postMobileChangeNumIsLoading,
+    ,
     postMobileChangeNum
   ] = usePostMobileChangeNum();
 
   const [ 
     postEmailChangeData,
     postEmailChangeError,
-    postEmailChangeIsLoading,
+    ,
     postEmailChange
   ] = usePostEmailChange();
 
   const [ 
     postEmailChangeOtpData,
     postEmailChangeOtpError,
-    postEmailChangeOtpIsLoading,
+    ,
     postEmailChangeOtp
   ] = usePostEmailChangeOtp();
 
   const [ 
     postMobileChangeOtpData,
     postMobileChangeOtpError,
-    postMobileChangeOtpIsLoading,
+    ,
     postMobileChangeOtp
   ] = usePostMobileChangeOtp();
 
   const [ 
     patchPasswordChangeData,
     patchPasswordChangeError,
-    patchPasswordChangeIsLoading,
+    ,
     patchPasswordChange
   ] = usePatchPasswordChange();
 
   const [ 
     patchProfilePicData,
     patchProfilePicError,
-    patchProfilePicIsLoading,
+    ,
     patchProfilePic
   ] = usePatchProfilePic();
 
   const [ 
     deleteProfilePicData,
     deleteProfilePicError,
-    deleteProfilePicIsLoading,
+    ,
     deleteProfilePic
   ] = useDeleteProfilePic();
 
   useEffect(()=>{
     getProfile()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   useEffect(()=>{
@@ -127,6 +117,7 @@ const VisiterProfile = () => {
    if(deleteProfilePicError){
     showErrorToast("Error in deleting profile pic")
    }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[deleteProfilePicData, deleteProfilePicError])
 
   useEffect(()=>{
@@ -137,6 +128,7 @@ const VisiterProfile = () => {
    if(patchProfilePicError){
     showErrorToast("Error in updating profile pic")
    }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[patchProfilePicData, patchProfilePicError])
 
   useEffect(()=>{
@@ -147,6 +139,7 @@ const VisiterProfile = () => {
    if(patchPasswordChangeError){
     showErrorToast("Error in changing password")
    }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[patchPasswordChangeData, patchPasswordChangeError])
 
   useEffect(()=>{
@@ -171,6 +164,7 @@ const VisiterProfile = () => {
    if(postMobileChangeOtpError){
     showErrorToast("Error in Updating Mobile Number")
    }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[postMobileChangeOtpData, postMobileChangeOtpError])
 
   useEffect(()=>{
@@ -183,6 +177,7 @@ const VisiterProfile = () => {
     if(postEmailChangeOtpError){
       showErrorToast("Error in Updating Email")
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[postEmailChangeOtpData, postEmailChangeOtpError])
 
   useEffect(()=>{
@@ -205,6 +200,7 @@ const VisiterProfile = () => {
    if(patchBasicProfileError){
     showErrorToast("Error in updating basic profile")
    }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[patchBasicProfileData, patchBasicProfileError])
   
   useEffect(() => {
@@ -214,7 +210,8 @@ const VisiterProfile = () => {
       setIsAuthenticated(false)
       navigate("/"); 
     }
-  }, [logOutClicked]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [logOutClicked, navigate, setIsAuthenticated]);
 
   // Profile Pic Form
 
@@ -481,7 +478,7 @@ const VisiterProfile = () => {
 
   useEffect(()=>{
     if(getProfileData?.data){
-      const {date_of_birth, email, father_name, full_name, gender, marital_status, mobile_number, profile_picture, user_type,id}=getProfileData?.data;
+      const {date_of_birth, email, father_name, full_name, gender, marital_status, mobile_number, profile_picture}=getProfileData?.data;
       setBasicProfileForm({
         full_name:full_name,
         father_name:father_name,
@@ -709,6 +706,7 @@ const VisiterProfile = () => {
                           <>
                             <img
                               src={showPicView}
+                              alt="Profile"
                               className="w-[200px] h-[200px] overflow-hidden rounded-full"
                             />
                             {profilePicError && <p className="text-red-500 text-sm">{profilePicError}</p>}
@@ -824,6 +822,7 @@ const VisiterProfile = () => {
                     showPicView ?<div className="w-[18%] flex justify-center">
                     <img
                       src={showPicView}
+                      alt="Profile"
                       className={`w-[200px] h-[200px] overflow-hidden rounded-full `}
                     />
                   </div> :<div className="w-[200px] h-[200px]  border border-[#E2E8F0] rounded-full"></div>

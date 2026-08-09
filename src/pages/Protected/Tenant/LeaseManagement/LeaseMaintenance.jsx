@@ -7,7 +7,6 @@ import {
   showErrorToast,
   showSuccessToast,
 } from "components/toaster/toastHelper";
-import Loader from "components/Loader/Loader";
 import UploadLeaseAgreement from "./UploadLeaseAgreement";
 import usePatchUploadAgreement from "pages/Protected/Owner/data/usePatchUploadAgreement";
 import DownloadAgreement from "./DownloadAgreement";
@@ -23,13 +22,13 @@ const TenantLeaseManagement = () => {
   const [selectedDocument, setSelectedDocument] = useState("");
   const [uploadAgreement, setUploadAgreement] = useState("");
   const [tenantId, setTenantId] = useState("");
-  const [data, isError, isLoading, getLeaseDetails] =
-    useGetOwnerLeaseManagement();
+  const [data, , , getLeaseDetails] = useGetOwnerLeaseManagement();
   const [patchData, patchIsError, patchIsLoading, patchUploadAgreement] =
     usePatchUploadAgreement();
 
   useEffect(() => {
     getLeaseDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

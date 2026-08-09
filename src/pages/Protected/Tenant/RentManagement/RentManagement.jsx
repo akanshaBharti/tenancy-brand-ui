@@ -1,38 +1,13 @@
-import Loader from "components/Loader/Loader";
 import useGetOwnerRentManagement from "pages/Protected/Owner/data/useGetRentManagement";
 import React, { useEffect } from "react";
 
-const individualRentHistory = [
-  {
-    id: 1,
-    paymentDate: "01/8/24",
-    amountPaid: "₹ 10,000",
-    afterDeduction: "₹ 9,500",
-    paymentType: "Online Payment",
-  },
-  {
-    id: 2,
-    paymentDate: "01/8/24",
-    amountPaid: "₹ 15,000",
-    afterDeduction: "₹ 14,250",
-    paymentType: "Bank Transfer",
-  },
-  {
-    id: 3,
-    paymentDate: "01/8/24",
-    amountPaid: "₹ 8,000",
-    afterDeduction: "₹ 7,100",
-    paymentType: "Online Payment",
-  },
-];
-
 const RentManagement = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  const [data, isError, isLoading, getRentDetails] =
-    useGetOwnerRentManagement();
+  const [data, , , getRentDetails] = useGetOwnerRentManagement();
 
   useEffect(() => {
     getRentDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import {PATCH_PASSWORD_CHANGE_URL, PATCH_PROFILE_PIC_CHANGE_URL, POST_EMAIL_CHANGE_OTP_URL, POST_MOBILE_CHANGE_OTP_URL} from "constants/api";
+import {PATCH_PROFILE_PIC_CHANGE_URL} from "constants/api";
 import useAPICall from "hooks/useAPICall";
 
 const usePatchProfilePic = () => {

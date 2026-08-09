@@ -3,18 +3,17 @@ import resolvedIcon from "../../../../assets/image/TenantHome/resolvedIcon.svg";
 import pendingIcon from "../../../../assets/image/OwnerHome/pending.svg";
 import RaisedRequestsDialog from "./RaisedRequestsDialog";
 import useGetOwnerMaintenanceRequest from "../data/useGetOwnerMaintRequest";
-import Loader from "components/Loader/Loader";
 
 const OwnerMaintenance = () => {
   const [isRaisedRequestOpen, setIsRaisedRequestOpen] = useState(false);
   const [selectedDetails, setSelectedDetails] = useState("");
   const [tenantName, setTenantName] = useState("");
   const [tenantContact, setTenantContact] = useState("");
-  const [data, isError, isLoading, getMaintenanceData] =
-    useGetOwnerMaintenanceRequest();
+  const [data, , , getMaintenanceData] = useGetOwnerMaintenanceRequest();
 
   useEffect(() => {
     getMaintenanceData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDetailOpen = (details, name, contact) => {

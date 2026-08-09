@@ -1,4 +1,4 @@
-import {GET_PROPERTIES_API_URL, POST_LOGIN_API_URL} from "constants/api";
+import {GET_PROPERTIES_API_URL} from "constants/api";
 import useAPICall from "hooks/useAPICall";
 
 const useGetHomeProperties = () => {

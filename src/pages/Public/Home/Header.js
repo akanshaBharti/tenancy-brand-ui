@@ -12,22 +12,12 @@ import OwnerTopProfile from "pages/Protected/Owner/OwnerProfile/OwnerTopProfile"
 
 const Header = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthStateContext);
+  const { isAuthenticated } = useContext(AuthStateContext);
   const [isOpenDilog, setIsOpenDilog] = useState(false);
   const [isOpenOtp, setIsOpenOtp] = useState({ val: false, otp_id: "" });
   const [isOpenWelcome, setIsOpenWelcome] = useState(false);
   const [isOpenLoginDilog, setIsOpenLoginDilog] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
-  const [showPP, setShowPP] = useState(false);
-
-  const firstNameLetter = user?.full_name
-    ? user?.full_name.split(" ")[0]?.charAt(0).toUpperCase()
-    : user?.business_name.split(" ")[0]?.charAt(0).toUpperCase();
-  const lastNameLetter = user?.full_name
-    ? user?.full_name.split(" ")[1]?.charAt(0).toUpperCase()
-    : user?.business_name.split(" ")[1]?.charAt(1).toUpperCase();
-
-  const fullNameLetter = firstNameLetter + lastNameLetter;
 
   const handleOpenDilog = () => {
      navigate("/register")

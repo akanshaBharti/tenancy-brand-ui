@@ -1,4 +1,4 @@
-import {GET_PROFILE_URL, PATCH_BASIC_PROFILE_URL} from "constants/api";
+import {PATCH_BASIC_PROFILE_URL} from "constants/api";
 import useAPICall from "hooks/useAPICall";
 
 const usePatchBasicProfileData = () => {

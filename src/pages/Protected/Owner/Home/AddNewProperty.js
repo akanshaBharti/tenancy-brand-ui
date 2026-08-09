@@ -28,11 +28,9 @@ const AddNewProperty = ({ setIsAddPropertyClicked }) => {
   const [securityDeposit, setsecurityDeposit] = useState("");
   const [leaseDuration, setleaseDuration] = useState("");
   const [visitationHours, setvisitationHours] = useState("");
-  const id = location?.state?.id;
   const data = location?.state?.getData;
 
-  const [postData, postIsError, postIsLoading, postLandDetails] =
-    usePostCreateLandDetails();
+  const [postData, , , postLandDetails] = usePostCreateLandDetails();
 
   useEffect(() => {
     if (postData) {

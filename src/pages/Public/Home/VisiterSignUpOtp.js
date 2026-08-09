@@ -10,7 +10,7 @@ import {
 } from "components/toaster/toastHelper";
 
 const VisiterSignUpOtp = ({ isOpenOtp, setIsOpenOtp, setIsOpenWelcome }) => {
-  const [postVerifyData, postVerifyError, postVerifyIsLoading, postVerifyOtp] =
+  const [postVerifyData, postVerifyError, , postVerifyOtp] =
     usePostVerifySignUpOtp();
   useEffect(() => {
     if (postVerifyData) {
@@ -74,12 +74,6 @@ const VisiterSignUpOtp = ({ isOpenOtp, setIsOpenOtp, setIsOpenWelcome }) => {
     console.log("OTP confirmed:", filledOtp, "otp_id", otpForm.otp_id);
     postVerifyOtp({ otp: Number(filledOtp), otp_id: Number(otpForm.otp_id) });
     // handleOpenSignUpWelcome();
-  };
-
-  // Handle sign-up after OTP confirmation
-  const handleOpenSignUpWelcome = () => {
-    setIsOpenWelcome(true);
-    setIsOpenOtp(false);
   };
 
   // Render OTP input and other content

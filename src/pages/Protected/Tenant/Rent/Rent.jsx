@@ -5,7 +5,6 @@ import paid from "../../../../assets/image/TenantHome/paid.svg";
 import downloadReceipt from "../../../../assets/image/TenantHome/downloadReceipt.svg";
 import useGetTenantRentHistory from "pages/Public/data/useGetTenantRentHistory";
 import { showErrorToast } from "components/toaster/toastHelper";
-import Loader from "components/Loader/Loader";
 
 const TenenatRent = () => {
   const [rentDetails, setRentDetails] = useState([]);
@@ -13,6 +12,7 @@ const TenenatRent = () => {
     useGetTenantRentHistory();
   useEffect(() => {
     GetTenantRentHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

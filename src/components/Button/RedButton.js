@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import arrow_right from "../../assets/image/Home/arrow-right.svg";
+import React from "react";
 
 function RedButton(props) {
   return (

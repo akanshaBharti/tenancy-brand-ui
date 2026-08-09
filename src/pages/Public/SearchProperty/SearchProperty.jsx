@@ -9,7 +9,6 @@ import search_filter from "../../../assets/image/Search/search_filter.svg";
 import premiumBtn from "../../../assets/image/Search/premiumBtn.svg";
 import searchApartment from "../../../assets/image/Search/searchApartment.svg";
 import map from "../../../assets/image/Search/map.svg";
-import flexible_plan from "../../../assets/image/Owners/flexible_plan.svg";
 import arrow_right from "../../../assets/image/Search/arrow-right.svg";
 import search from "../../../assets/image/Search/search.svg";
 import fully from "../../../assets/image/Home/fully.svg";

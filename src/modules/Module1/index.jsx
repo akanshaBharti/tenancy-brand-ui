@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import useGetData from "./Data/useGetData";
 
 const Module1 = () => {
-  const [data, Error, isLoading, getData] = useGetData();
+  const [data, Error, , getData] = useGetData();
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log("data fetched", data);

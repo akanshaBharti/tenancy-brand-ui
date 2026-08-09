@@ -12,19 +12,17 @@ import {
   showErrorToast,
   showSuccessToast,
 } from "components/toaster/toastHelper";
-import Loader from "components/Loader/Loader";
-
 const TenantMaintenanceRequest = () => {
   const [categoryOfReq, setCategoryOfReq] = useState("");
   const [desc, setDesc] = useState("");
   const [uploadPhoto, setUploadPhoto] = useState("");
-  const [data, isError, isLoading, getMaintenanceData] =
-    useGetMaintenanceRequest();
-  const [postData, postIsError, postIsLoading, postMaintenanceRequest] =
+  const [data, , , getMaintenanceData] = useGetMaintenanceRequest();
+  const [postData, postIsError, , postMaintenanceRequest] =
     usePostMaintenanceRequest();
 
   useEffect(() => {
     getMaintenanceData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -35,6 +33,7 @@ const TenantMaintenanceRequest = () => {
       setDesc("");
       setUploadPhoto("");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postData]);
 
   useEffect(() => {

@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import YellowButton from "components/Button/YellowButton";
 
 // images
 import tenancyLogo from "assets/image/tenancyLogo.svg";
 import barIcon from "assets/image/Search/barIcon.svg";
-import search_filter from "assets/image/Search/search_filter.svg";
 import premiumBtn from "assets/image/Search/premiumBtn.svg";
 import searchApartment from "assets/image/Search/searchApartment.svg";
 import map from "assets/image/Search/map.svg";
-import arrow_right from "assets/image/Search/arrow-right.svg";
-import search from "assets/image/Search/search.svg";
 import fully from "assets/image/Home/fully.svg";
 import bhk from "assets/image/Home/bhk.svg";
 import sqft from "assets/image/Home/sqft.svg";
@@ -18,7 +15,6 @@ import previousBtn from "assets/image/VisiterProfile/arrow-left.svg";
 
 const Wishlist = () => {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState(false);
 
   const cards = [
     {

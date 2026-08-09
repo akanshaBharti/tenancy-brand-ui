@@ -5,7 +5,6 @@ import WhiteButton from "../../../../components/Button/WhiteButton";
 import upload from "../../../../assets/image/Owners/comprehensive.svg";
 import mainetenance from "../../../../assets/image/Owners/regular.svg";
 import InputField from "../../../../components/InputFields/inputField";
-import sample_profile from "../../../../assets/image/TenantHome/Sample_profile.svg";
 import BlueButton from "../../../../components/Button/BlueButton";
 import available from "../../../../assets/image/OwnerHome/available.svg";
 import occupied from "../../../../assets/image/OwnerHome/occupied.svg";
@@ -33,36 +32,23 @@ const OwnerHome = () => {
   const [emergencyContactNumber, setemergencyContactNumber] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const [data, isError, isLoading, getOwnerDashboardDetails] =
-    useGetOwnerDashboard();
+  const [data, , , getOwnerDashboardDetails] = useGetOwnerDashboard();
 
-  const [getData, getIsError, getIsLoading, getOwnerProfileDetails] =
-    useGetOwnerProfile();
+  const [getData, , , getOwnerProfileDetails] = useGetOwnerProfile();
 
-  const [
-    patchOwnerInfoData,
-    patchOwnerIsError,
-    patchOwnerIsLoading,
-    patchOwnerInfoDetails,
-  ] = usePatchOwnerProfile();
+  const [patchOwnerInfoData, , , patchOwnerInfoDetails] =
+    usePatchOwnerProfile();
 
-  const [
-    patchProfileData,
-    patchProfileIsError,
-    patchProfileIsLoading,
-    patchProfileDetails,
-  ] = usePatchProfilePicture();
+  const [patchProfileData, , , patchProfileDetails] =
+    usePatchProfilePicture();
 
-  const [
-    deleteProfileData,
-    deleteProfileIsError,
-    deleteProfileIsLoading,
-    deleteProfileDetails,
-  ] = useDeleteProfilePicture();
+  const [deleteProfileData, , , deleteProfileDetails] =
+    useDeleteProfilePicture();
 
   useEffect(() => {
     getOwnerDashboardDetails();
     getOwnerProfileDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -77,6 +63,7 @@ const OwnerHome = () => {
       showSuccessToast("Profile Uploaded");
       getOwnerProfileDetails();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patchProfileData]);
 
   useEffect(() => {
@@ -84,6 +71,7 @@ const OwnerHome = () => {
       showSuccessToast("Profile picture deleted successfully");
       getOwnerProfileDetails();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deleteProfileData]);
 
   useEffect(() => {

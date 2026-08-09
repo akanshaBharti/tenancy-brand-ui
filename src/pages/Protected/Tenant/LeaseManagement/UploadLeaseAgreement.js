@@ -2,7 +2,6 @@ import DialogBox from "components/DialogBox";
 import React from "react";
 import uploadIcon from "assets/image/Owners/upload.svg";
 import WhiteButton from "components/Button/WhiteButton";
-import BlueButton from "components/Button/BlueButton";
 import YellowButton from "components/Button/YellowButton";
 import Loader from "components/Loader/Loader";
 

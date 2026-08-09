@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import YellowButton from "../../../components/Button/YellowButton";
 
 // images
-import apartmentImg from "../../../assets/image/Home/apartmentImg.svg";
 import sofa from "../../../assets/image/Home/sofa.svg";
 import bhk from "../../../assets/image/Home/bhkProp.svg";
 import expand from "../../../assets/image/Home/expand.svg";
@@ -29,12 +28,7 @@ import { Link } from "react-router-dom";
 import useGetHomeProperties from "../data/useGetHomeProperties";
 
 const TailoredLiving = () => {
-  const [
-    getPropertiesData,
-    getPropertiesError,
-    getPropertyIsLoading,
-    getProperties,
-  ] = useGetHomeProperties();
+  const [getPropertiesData, , , getProperties] = useGetHomeProperties();
   const [properties, setProperties] = useState([]);
   const cardsRef = useRef(null);
   const premiumCardsRef = useRef(null);
@@ -42,6 +36,7 @@ const TailoredLiving = () => {
 
   useEffect(() => {
     getProperties();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -51,44 +46,6 @@ const TailoredLiving = () => {
       }
     }
   }, [getPropertiesData]);
-
-  const cards = [
-    {
-      id: "1",
-      image: apartmentImg,
-      apartment: "Alekhya Apartments",
-      place: "Madhapur",
-      price: "20,000",
-    },
-    {
-      id: "2",
-      image: apartmentImg,
-      apartment: "Alekhya Apartments",
-      place: "Madhapur",
-      price: "20,000",
-    },
-    {
-      id: "3",
-      image: apartmentImg,
-      apartment: "Alekhya Apartments",
-      place: "Madhapur",
-      price: "20,000",
-    },
-    {
-      id: "4",
-      image: apartmentImg,
-      apartment: "Alekhya Apartments",
-      place: "Madhapur",
-      price: "20,000",
-    },
-    {
-      id: "5",
-      image: apartmentImg,
-      apartment: "Alekhya Apartments",
-      place: "Madhapur",
-      price: "20,000",
-    },
-  ];
 
   const scrollRightPremium = () => {
     if (premiumCardsRef.current) {
@@ -112,7 +69,7 @@ const TailoredLiving = () => {
           {/* premium plan */}
           <div className="grid grid-cols-12 mb-[1.5rem]">
             <div className="col-span-6">
-              <img src={premium} alt="premium image" />
+              <img src={premium} alt="premium" />
             </div>
             <div className="col-span-6 py-[1.5rem] px-[1.5rem] mt-2">
               <h4 className="font-[600] text-[1.8rem] text-darkBlue">
@@ -123,19 +80,19 @@ const TailoredLiving = () => {
               </p>
               <div className="mt-[2rem] flex flex-col gap-[0.9rem] text-darkBlue">
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={location} alt="location img" />
+                  <img src={location} alt="location" />
                   Prime locations in sought-after gated communities
                 </h4>
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={bed} alt="bed img" />
+                  <img src={bed} alt="bed" />
                   Stylishly furnished private rooms
                 </h4>
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={access} alt="access img" />
+                  <img src={access} alt="access" />
                   Access to high-end amenities
                 </h4>
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={ideal} alt="ideal img" />
+                  <img src={ideal} alt="ideal" />
                   Ideal for those who appreciate the finer things in life
                 </h4>
               </div>
@@ -147,11 +104,11 @@ const TailoredLiving = () => {
             <h4 className="text-[1.1rem] font-[600] ">Most Popular</h4>
             <button className="text-[500] flex gap-2 items-center">
               See All
-              <img
-                src={rightArrow}
-                alt="right arrow image"
-                className="w-5 h-5"
-              />
+                  <img
+                    src={rightArrow}
+                    alt="right arrow"
+                    className="w-5 h-5"
+                  />
             </button>
           </div>
           {/* most popular cards */}
@@ -172,7 +129,7 @@ const TailoredLiving = () => {
                       >
                         <img
                           src={item?.media?.[0]?.photo}
-                          alt="apartment image"
+                          alt="apartment"
                           className="mb-[0.8rem]"
                         />
                         <h4 className="font-[500] text-[1rem] text-darkBlue">
@@ -183,15 +140,15 @@ const TailoredLiving = () => {
                         </h4>
                         <div className="flex gap-2 my-[0.8rem]">
                           <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                            <img src={bhk} alt="bhk icon" />
+                            <img src={bhk} alt="bhk" />
                             <span>{item.property_type}</span>
                           </div>
                           <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                            <img src={sofa} alt="sofa Icon" />
+                            <img src={sofa} alt="sofa" />
                             <span>{item.property_condition}</span>
                           </div>
                           <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                            <img src={expand} alt="Expand Icon" />
+                            <img src={expand} alt="expand" />
                             <span>{item.total_square_feet} Sqft</span>
                           </div>
                         </div>
@@ -213,6 +170,7 @@ const TailoredLiving = () => {
                     </Link>
                   );
                 }
+                return null;
               })}
             </div>
             {/* Right arrow button (Fixed, doesn't scroll with content) */}
@@ -220,7 +178,7 @@ const TailoredLiving = () => {
               <button onClick={scrollRightPremium}>
                 <img
                   src={rightArrow}
-                  alt="right arrow image"
+                  alt="right arrow"
                   className="w-5 h-5"
                 />
               </button>
@@ -246,26 +204,26 @@ const TailoredLiving = () => {
               </p>
               <div className="mt-[2rem] flex flex-col gap-[0.9rem] text-darkBlue">
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={location} alt="location img" />
+                  <img src={location} alt="location" />
                   Ideal balance of personal space and community
                 </h4>
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={bed} alt="bed img" />
+                  <img src={bed} alt="bed" />
                   Private, furnished rooms in standalone apartments
                 </h4>
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={access} alt="access img" />
+                  <img src={access} alt="access" />
                   Essential amenities for daily convenience
                 </h4>
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={ideal} alt="ideal img" />
+                  <img src={ideal} alt="ideal" />
                   Perfect for professionals and students <br></br> valuing
                   autonomy
                 </h4>
               </div>
             </div>
             <div className="col-span-6">
-              <img src={standard} alt="standard image" />
+              <img src={standard} alt="standard" />
             </div>
           </div>
 
@@ -274,11 +232,11 @@ const TailoredLiving = () => {
             <h4 className="text-[1.1rem] font-[600]">Most Popular</h4>
             <button className="text-[500] flex gap-2 items-center">
               See All
-              <img
-                src={rightArrow}
-                alt="right arrow image"
-                className="w-5 h-5"
-              />
+                  <img
+                    src={rightArrow}
+                    alt="right arrow"
+                    className="w-5 h-5"
+                  />
             </button>
           </div>
 
@@ -291,8 +249,8 @@ const TailoredLiving = () => {
               {properties.map((item, index) => {
                 if (item.property_plan === 2) {
                   return (
-                    <Link
-                    state={{properties:properties}}
+                    <Link 
+                     state={{properties:properties}}
                     to={`/public/property-details/${item.id}`}>
                       <div
                         className="bg-white rounded-lg p-2 w-[320px]"
@@ -300,7 +258,7 @@ const TailoredLiving = () => {
                       >
                         <img
                           src={item?.media?.[0]?.photo}
-                          alt="apartment image"
+                          alt="apartment"
                           className="mb-[0.8rem]"
                         />
                         <h4 className="font-[500] text-[1rem] text-darkBlue">
@@ -311,15 +269,15 @@ const TailoredLiving = () => {
                         </h4>
                         <div className="flex gap-2 my-[0.8rem]">
                           <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                            <img src={bhk} alt="bhk icon" />
+                            <img src={bhk} alt="bhk" />
                             <span>{item.property_type}</span>
                           </div>
                           <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                            <img src={sofa} alt="sofa Icon" />
+                            <img src={sofa} alt="sofa" />
                             <span>{item.property_condition}</span>
                           </div>
                           <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                            <img src={expand} alt="Expand Icon" />
+                            <img src={expand} alt="expand" />
                             <span>{item.total_square_feet} Sqft</span>
                           </div>
                         </div>
@@ -341,6 +299,7 @@ const TailoredLiving = () => {
                     </Link>
                   );
                 }
+                return null;
               })}
             </div>
             {/* Right arrow button (Fixed, doesn't scroll with content) */}
@@ -348,7 +307,7 @@ const TailoredLiving = () => {
               <button onClick={scrollRightStandard}>
                 <img
                   src={rightArrow}
-                  alt="right arrow image"
+                  alt="right arrow"
                   className="w-5 h-5"
                 />
               </button>
@@ -366,7 +325,7 @@ const TailoredLiving = () => {
           {/* shared plan */}
           <div className="grid grid-cols-12 mb-[1.5rem]">
             <div className="col-span-6">
-              <img src={sharedImg} alt="shared image" />
+              <img src={sharedImg} alt="shared" />
             </div>
             <div className="col-span-6 py-[1.5rem] px-[1.5rem] mt-2">
               <h4 className="font-[600] text-[1.8rem] text-darkBlue">
@@ -377,19 +336,19 @@ const TailoredLiving = () => {
               </p>
               <div className="mt-[2rem] flex flex-col gap-[0.9rem] text-darkBlue">
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={location} alt="location img" />
+                  <img src={location} alt="location" />
                   Budget-friendly options in well-located apartments
                 </h4>
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={bed} alt="bed img" />
+                  <img src={bed} alt="bed" />
                   Shared rooms (max 2 persons) with quality furnishings
                 </h4>
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={access} alt="access img" />
+                  <img src={access} alt="access" />
                   All the amenities of out Standard Plan
                 </h4>
                 <h4 className="flex gap-2 font-[400]">
-                  <img src={ideal} alt="ideal img" />
+                  <img src={ideal} alt="ideal" />
                   Ideal for students and young professional seeking vibrant,{" "}
                   <br></br>communal living
                 </h4>
@@ -402,11 +361,11 @@ const TailoredLiving = () => {
             <h4 className="text-[1.1rem] font-[600]">Most Popular</h4>
             <button className="text-[500] flex gap-2 items-center">
               See All
-              <img
-                src={rightArrow}
-                alt="right arrow image"
-                className="w-5 h-5"
-              />
+                  <img
+                    src={rightArrow}
+                    alt="right arrow"
+                    className="w-5 h-5"
+                  />
             </button>
           </div>
           {/* most popular cards */}
@@ -419,7 +378,7 @@ const TailoredLiving = () => {
                 if (item.property_plan === 3) {
                   return (
                     <Link 
-                    state={{properties:properties}}
+                     state={{properties:properties}}
                     to={`/public/property-details/${item.id}`}>
                       <div
                         key={item.id}
@@ -427,7 +386,7 @@ const TailoredLiving = () => {
                       >
                         <img
                           src={item?.media?.[0]?.photo}
-                          alt="apartment image"
+                          alt="apartment"
                           className="mb-[0.8rem]"
                         />
                         <h4 className="font-[500] text-[1rem] text-darkBlue">
@@ -438,15 +397,15 @@ const TailoredLiving = () => {
                         </h4>
                         <div className="flex gap-2 my-[0.8rem]">
                           <div className="flex items-center px-2.5 py-1.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                            <img src={bhk} alt="bhk icon" />
+                            <img src={bhk} alt="bhk" />
                             <span>{item.property_type}</span>
                           </div>
                           <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                            <img src={sofa} alt="sofa Icon" />
+                            <img src={sofa} alt="sofa" />
                             <span>{item.property_condition}</span>
                           </div>
                           <div className="flex items-center px-2.5 gap-[3px] bg-[#F3F4F6] text-[#6B7280] rounded-2xl text-[0.8rem]">
-                            <img src={expand} alt="Expand Icon" />
+                            <img src={expand} alt="expand" />
                             <span>{item.total_square_feet} Sqft</span>
                           </div>
                         </div>
@@ -468,13 +427,14 @@ const TailoredLiving = () => {
                     </Link>
                   );
                 }
+                return null;
               })}
             </div>
             <div className="bg-white rounded-full flex items-center justify-center p-2 absolute top-1/2 transform -translate-y-1/2 right-0 z-10 shadow-md">
               <button onClick={scrollRightShared}>
                 <img
                   src={rightArrow}
-                  alt="right arrow image"
+                  alt="right arrow"
                   className="w-5 h-5"
                 />
               </button>
@@ -505,15 +465,15 @@ const TailoredLiving = () => {
 
               <div className="mt-[1.5rem] ml-2 flex flex-col gap-[0.9rem] text-darkBlue">
                 <h4 className="flex gap-2 font-[500]">
-                  <img src={heart} alt="heart img" />
+                  <img src={heart} alt="heart" />
                   Curate your favourites with personalised wish list
                 </h4>
                 <h4 className="flex gap-2 font-[500]">
-                  <img src={compare} alt="compare img" />
+                  <img src={compare} alt="compare" />
                   Compare properties side-by-side for informed decisions
                 </h4>
                 <h4 className="flex gap-2 font-[500]">
-                  <img src={schedule} alt="schedule img" />
+                  <img src={schedule} alt="schedule" />
                   Schedule visits with ease
                 </h4>
               </div>
@@ -528,7 +488,7 @@ const TailoredLiving = () => {
             </div>
             <img
               src={photo_stack}
-              alt="photo stack "
+              alt="stack"
               className="w-[18rem] h-[18rem]"
             />
           </div>
@@ -555,23 +515,23 @@ const TailoredLiving = () => {
 
               <div className="mt-[1.5rem] ml-2 flex flex-col gap-[0.9rem] text-darkBlue">
                 <h4 className="flex gap-2 font-[500]">
-                  <img src={link} alt="link img" />
+                  <img src={link} alt="link" />
                   Quality tenant matching
                 </h4>
                 <h4 className="flex gap-2 font-[500]">
-                  <img src={complete} alt="complete img" />
+                  <img src={complete} alt="complete" />
                   Complete property management
                 </h4>
                 <h4 className="flex gap-2 font-[500]">
-                  <img src={indian_rupee} alt="indian_rupee img" />
+                  <img src={indian_rupee} alt="indian_rupee" />
                   Timely rent collection
                 </h4>
                 <h4 className="flex gap-2 font-[500]">
-                  <img src={paperwork} alt="paperwork img" />
+                  <img src={paperwork} alt="paperwork" />
                   Paperwork and legal compliance
                 </h4>
                 <h4 className="flex gap-2 font-[500]">
-                  <img src={house_plus} alt="house_plus img" />
+                  <img src={house_plus} alt="house_plus" />
                   Regular property maintenance
                 </h4>
               </div>
@@ -584,7 +544,7 @@ const TailoredLiving = () => {
             </div>
             <img
               src={property}
-              alt="property image "
+              alt="property"
               className="w-[30rem] h-[26rem]"
             />
           </div>

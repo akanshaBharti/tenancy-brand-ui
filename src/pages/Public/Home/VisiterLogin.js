@@ -9,7 +9,7 @@ import { showErrorToast, showSuccessToast } from 'components/toaster/toastHelper
 import { AuthStateContext } from 'App';
 
 const VisiterLogin = ({setIsOpenLoginDilog,isOpenLoginDilog}) => {
-  const [postLoginData, postLoginError, postLoginIsLoading, postLogin] =
+  const [postLoginData, postLoginError, , postLogin] =
   usePostLogin();
 
   const { setIsAuthenticated } = useContext(AuthStateContext);
@@ -35,6 +35,7 @@ const VisiterLogin = ({setIsOpenLoginDilog,isOpenLoginDilog}) => {
         setIsOpenLoginDilog(false)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[postLoginData])
   const [loginForm, setLoginForm] = useState({
     mobile_number:"",

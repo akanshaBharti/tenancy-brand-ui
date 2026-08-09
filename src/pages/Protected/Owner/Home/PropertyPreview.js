@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import useGetOwnerPropertyPreview from "../data/useGetPropertyPreview";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // images
 // import arrow_right from "../../../../assets/image/Search/arrow-right.svg";
@@ -16,12 +16,13 @@ import mainetenance from "../../../../assets/image/Owners/regular.svg";
 const PropertyPreview = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [getData, isError, isLoading, getpropertyDetails] =
+  const [getData, , isLoading, getpropertyDetails] =
     useGetOwnerPropertyPreview();
 
   const data = getData?.data;
   useEffect(() => {
     getpropertyDetails(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -185,6 +186,7 @@ const PropertyPreview = () => {
                         </div>
                       );
                     }
+                    return null;
                   })}
                 </div>
 
@@ -203,6 +205,7 @@ const PropertyPreview = () => {
                         </div>
                       );
                     }
+                    return null;
                   })}
                 </div>
 
@@ -221,6 +224,7 @@ const PropertyPreview = () => {
                         </div>
                       );
                     }
+                    return null;
                   })}
                 </div>
               </div>
